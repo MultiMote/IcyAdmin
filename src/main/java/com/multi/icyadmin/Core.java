@@ -7,7 +7,6 @@ package com.multi.icyadmin;
 import com.multi.icyadmin.data.DynamicStorage;
 import com.multi.icyadmin.handlers.ActionHandler;
 import com.multi.icyadmin.handlers.CommandHandler;
-import com.multi.icyadmin.handlers.ResourcesReloadListener;
 import com.multi.icyadmin.handlers.packets.PlayerInfoPacket;
 import com.multi.icyadmin.handlers.packets.SendCommandPacket;
 import com.multi.icyadmin.proxy.CommonProxy;
@@ -23,8 +22,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,12 +53,6 @@ public class Core {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.clientInit();
-        Minecraft mc = Minecraft.getMinecraft();
-
-        if (mc.getResourceManager() instanceof SimpleReloadableResourceManager) { //i dunno
-            ((SimpleReloadableResourceManager) mc.getResourceManager()).registerReloadListener(new ResourcesReloadListener());
-        }
-
     }
 
     @EventHandler

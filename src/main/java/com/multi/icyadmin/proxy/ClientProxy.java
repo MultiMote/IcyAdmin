@@ -3,10 +3,12 @@ package com.multi.icyadmin.proxy;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.handlers.ClientHandler;
 import com.multi.icyadmin.handlers.KeyHandler;
+import com.multi.icyadmin.handlers.ResourcesReloadListener;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -19,7 +21,11 @@ public class ClientProxy extends CommonProxy {
     public void clientInit() {
         FMLCommonHandler.instance().bus().register(new KeyHandler());
         KeyHandler.registerKeys();
+        Minecraft mc = Minecraft.getMinecraft();
 
+        if (mc.getResourceManager() instanceof SimpleReloadableResourceManager) { //i dunno
+            ((SimpleReloadableResourceManager) mc.getResourceManager()).registerReloadListener(new ResourcesReloadListener());
+        }
     }
 
     @Override

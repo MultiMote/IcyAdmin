@@ -13,6 +13,7 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class CommonProxy {
     public void clientInit() {
+
     }
 
     public EntityPlayer getMessagePlayer(MessageContext ctx) {
