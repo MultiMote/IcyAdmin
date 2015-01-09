@@ -1,0 +1,16 @@
+[
+{
+  "modid": "icyadmin",
+  "name": "IcyAdmin",
+  "description": "Admin panel like infiSTAR",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["MultiMote"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

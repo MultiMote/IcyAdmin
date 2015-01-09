@@ -1,0 +1,20 @@
+{
+  "other.no": {
+    "category": "block",
+    "sounds": [
+      "other/no"
+    ]
+  },
+  "other.popup": {
+    "category": "block",
+    "sounds": [
+      "other/popup"
+    ]
+  },
+  "other.enterkey": {
+    "category": "block",
+    "sounds": [
+      "other/enterkey"
+    ]
+  }
+}

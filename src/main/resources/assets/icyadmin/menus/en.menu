@@ -1,0 +1,108 @@
+#This is default menu file for English locale. Mixed commands and actions.
+
+menu_file_begin
+
+begin MAIN_PAGE
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Main Menu ]===  " as TITLE color #1092E8
+add "    | Admin Logs" as PAGE to ADMIN_LOGS_PAGE color #1092E8
+add "    | Death Logs" as PAGE to DEATH_LOGS_PAGE color #1092E8
+add "    | Time" as PAGE to TIME_PAGE color #1092E8
+add "    | Weather" as PAGE to WEATHER_PAGE color #1092E8
+add "    | Kits" as PAGE to KITS_PAGE color #1092E8
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Kicks, Bans ]===  " as TITLE color #1092E8
+add "    Kick" as CMD_EXEC cmd "kick %player% $Kick_Reason" color #FACBD1
+add "    Ban with reason" as CMD_EXEC cmd "ban %player% $Ban_Reason" color #B81A0F
+add "    Ban" as CMD_EXEC cmd "ban %player%" color #B81A0F
+add "    Throw" as THROW_UP color #B81A0F
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Teleportation, Rideables ]===  " as TITLE color #1092E8
+add "    Teleport player to me" as CMD_EXEC cmd "tp %player% %me%" color #38B5E1
+add "    Teleport me to player" as CMD_EXEC cmd "tp %me% %player%" color #38B5E1
+add "    Unload player out of vehicle" as NOTHING color #38B5E1
+#add "=============================================" as TITLE color #406BC7
+#add "  ===[ System Icons ]===  " as TITLE color #1092E8
+#add "    On-screen icons" as NOTHING color #B81A0F
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Admin Tools ]===  " as TITLE color #1092E8
+add "    Godmode" as INVULNERABILITY_TOGGLE color #B81A0F
+#add "    Speed boost" as NOTHING color #B81A0F
+add SEPARATOR
+add "    Creative mode" as CMD_EXEC cmd "gamemode 1 %me%" color #B81A0F
+add "    Survival mode" as CMD_EXEC cmd "gamemode 0 %me%" color #B81A0F
+add "    Adventure mode" as CMD_EXEC cmd "gamemode 2 %me%" color #B81A0F
+add SEPARATOR
+add "    Fast shooting" as FAST_SHOOTING_TOGGLE color #B81A0F
+add "    Remove hostiles (5m) every 2 seconds" as MOB_AURA_TOGGLE color #B81A0F
+add "    Invincibility" as INVINCIBILITY_TOGGLE color #B81A0F
+add "    Hide Nameplate" as NAMEPLATE_TOGGLE color #B81A0F
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Utils ]===  " as TITLE color #1092E8
+add "    Play sound to all" as CMD_EXEC cmd "playsound $Sound @a" color #38B5E1
+add "    Play sound (extended)" as CMD_EXEC cmd "playsound $Sound $Play_sound_for $Sound_X_coord $Sound_Y_coord $Sound_Z_coord $Volume $Pitch" color #38B5E1
+add "    Say" as CMD_EXEC cmd "say $Text_to_say" color #38B5E1
+add "    Set world spawn here" as CMD_EXEC cmd "setworldspawn" color #38B5E1
+add "=============================================" as TITLE color #406BC7
+
+end MAIN_PAGE
+
+
+begin ADMIN_LOGS_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Admin Logs ]===  " as TITLE color #1092E8
+include ADMIN_LOGS
+end ADMIN_LOGS_PAGE
+
+begin DEATH_LOGS_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Death Logs ]===  " as TITLE color #1092E8
+include DEATH_LOGS
+end DEATH_LOGS_PAGE
+
+begin TIME_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Time Menu ]===  " as TITLE color #1092E8
+add "   +1 Hour" as CMD_EXEC cmd "time add 1000" color #1092E8
+add "   +3 Hour" as CMD_EXEC cmd "time add 3000" color #1092E8
+add "   +6 Hour" as CMD_EXEC cmd "time add 6000" color #1092E8
+add SEPARATOR
+add "     -> 06:00" as CMD_EXEC cmd "time set 0" color #5090A2
+add "     -> 12:00" as CMD_EXEC cmd "time set 6000" color #E5E33B
+add "     -> 18:00" as CMD_EXEC cmd "time set 12000" color #E87E1F
+add "     -> 00:00" as CMD_EXEC cmd "time set 18000" color #3E3E3E
+add SEPARATOR
+add "   Manually" as CMD_EXEC cmd "time set $Set_time_to" color #1092E8
+end TIME_PAGE
+
+begin WEATHER_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Weather Menu ]===  " as TITLE color #1092E8
+add "     -> Clear weather for 1 Hour" as CMD_EXEC cmd "weather clear 3600" color #EACE5D
+add "     -> Clear for 6 Hours" as CMD_EXEC cmd "weather clear 21600" color #EACE5D
+add "     -> Clear for 12 Hours" as CMD_EXEC cmd "weather clear 43200" color #EACE5D
+add "     ---> Set time manually" as CMD_EXEC cmd "weather clear $Clear_weather_for" color #EACE5D
+add SEPARATOR
+add "     -> Rain For 10 Minutes" as CMD_EXEC cmd "weather rain 600" color #63869F
+add "     -> Rain For 30 Minutes" as CMD_EXEC cmd "weather rain 1800" color #63869F
+add "     -> Rain For 1 Hour" as CMD_EXEC cmd "weather rain 3600" color #63869F
+add "     ---> Set time manually" as CMD_EXEC cmd "weather rain $Rain_for" color #63869F
+add SEPARATOR
+add "     -> Thunderstorm For 10 Minutes" as CMD_EXEC cmd "weather thunder 600" color #6A74B7
+add "     -> Thunderstorm For 30 Minutes" as CMD_EXEC cmd "weather thunder 1800" color #6A74B7
+add "     -> Thunderstorm For 1 Hour" as CMD_EXEC cmd "weather thunder 3600" color #6A74B7
+add "     ---> Set time manually" as CMD_EXEC cmd "weather thunder $Thunderstorm_for" color #6A74B7
+add SEPARATOR
+end WEATHER_PAGE
+
+begin KITS_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Kits Menu ]===  " as TITLE color #1092E8
+add "    Apple" as CMD_EXEC cmd "clear %me%(>>)give %me% apple" color #1092E8
+add "    Newbie" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet(>>)give %me% leather_chestplate(>>)give %me% leather_leggings(>>)give %me% leather_boots(>>)give %me% wooden_sword" color #1092E8
+end KITS_PAGE

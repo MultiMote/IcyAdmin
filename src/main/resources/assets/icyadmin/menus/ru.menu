@@ -1,0 +1,14 @@
+#Это стандартныое меню для Русского языка. Команды и действия смешаны.
+
+menu_file_begin
+
+begin MAIN_PAGE
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Главное меню ]===  " as TITLE color #1092E8
+add "    | Логи администрации" as NOTHING color #1092E8
+add "    | Логи смертей" as NOTHING color #1092E8
+add "    | Время" as NOTHING color #1092E8
+add "    | Погода" as NOTHING color #1092E8
+add "    | Наборы" as NOTHING color #1092E8
+add "=============================================" as TITLE color #406BC7
+end MAIN_PAGE
