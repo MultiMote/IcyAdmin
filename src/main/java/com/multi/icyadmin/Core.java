@@ -8,6 +8,8 @@ import com.multi.icyadmin.data.DynamicStorage;
 import com.multi.icyadmin.handlers.ActionHandler;
 import com.multi.icyadmin.handlers.CommandHandler;
 import com.multi.icyadmin.handlers.packets.PlayerInfoPacket;
+import com.multi.icyadmin.handlers.packets.RequestPacket;
+import com.multi.icyadmin.handlers.packets.ResponsePacket;
 import com.multi.icyadmin.handlers.packets.SendCommandPacket;
 import com.multi.icyadmin.proxy.CommonProxy;
 import com.multi.icyadmin.utils.FileProcessor;
@@ -60,6 +62,8 @@ public class Core {
         packets = NetworkRegistry.INSTANCE.newSimpleChannel(Defines.MOD_ID);
         packets.registerMessage(SendCommandPacket.class, SendCommandPacket.class, 0, Side.SERVER);
         packets.registerMessage(PlayerInfoPacket.class, PlayerInfoPacket.class, 1, Side.CLIENT);
+        packets.registerMessage(RequestPacket.class, RequestPacket.class, 2, Side.SERVER);
+        packets.registerMessage(ResponsePacket.class, ResponsePacket.class, 3, Side.CLIENT);
     }
 
 

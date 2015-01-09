@@ -1,10 +1,12 @@
 package com.multi.icyadmin.gui;
 
 import com.multi.icyadmin.Core;
+import com.multi.icyadmin.data.IncludesEnum;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
 import com.multi.icyadmin.data.NodeActionsEnum;
 import com.multi.icyadmin.gui.elements.ItemList;
+import com.multi.icyadmin.handlers.packets.RequestPacket;
 import com.multi.icyadmin.handlers.packets.SendCommandPacket;
 import com.multi.icyadmin.utils.GLUtils;
 import net.minecraft.client.gui.GuiPlayerInfo;
@@ -87,7 +89,7 @@ public class InfiPanelGui extends GuiScreen {
 
         if (askGui.isVisible()) askGui.initGui();
 
-        reloadMenu();
+        reloadMenu(true);
 
         Keyboard.enableRepeatEvents(true);
     }
@@ -98,11 +100,33 @@ public class InfiPanelGui extends GuiScreen {
         Keyboard.enableRepeatEvents(false);
     }
 
-    private void reloadMenu() {
+    public void reloadMenu(boolean request) {
         menus.clear();
         itemsList.setIndexSelected(0);
         for (MenuElement node : Core.dynStorage.menus) {
             if (node.menu.equals(cur_menu)) menus.add(node.action);
+        }
+
+        List<ItemListNode> tmenus = new ArrayList<ItemListNode>(menus);
+        for (ItemListNode listnode : tmenus) {
+            IncludesEnum inc = listnode.getInclude();
+            if (inc != null) {
+                if (request) {
+                    Core.packets.sendToServer(new RequestPacket(inc));
+                    menus.add(ItemListNode.title(I18n.format("icyadmin.receiving")));
+                } else {
+                    for (MenuElement node : Core.dynStorage.menus) {
+                        if (node.menu.equals("$INC_" + inc)) menus.add(node.action);
+                    }
+                }
+            }
+        }
+    }
+
+    public void flushIncludes(IncludesEnum inc) {
+        ArrayList<MenuElement> mcopy = new ArrayList<MenuElement>(Core.dynStorage.menus);
+        for (MenuElement node : mcopy) {
+            if (node.menu.equals("$INC_" + inc)) Core.dynStorage.menus.remove(node);
         }
     }
 
@@ -133,7 +157,7 @@ public class InfiPanelGui extends GuiScreen {
     public void elementDoubleClicked(ItemListNode node) {
         if (node.getType() == NodeActionsEnum.PAGE) {
             cur_menu = node.getCommandData();
-            reloadMenu();
+            reloadMenu(true);
         } else if (node.getType() == NodeActionsEnum.CMD_EXEC) {
             if (!Core.proxy.canClientUsePanel()) {
                 printNoPerms();

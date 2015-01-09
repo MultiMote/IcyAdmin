@@ -1,6 +1,5 @@
 package com.multi.icyadmin.handlers;
 
-import com.multi.icyadmin.Core;
 import com.multi.icyadmin.Defines;
 import com.multi.icyadmin.data.CapabilitiesEnum;
 import net.minecraft.entity.Entity;
@@ -69,7 +68,7 @@ public class PlayerProps implements IExtendedEntityProperties {
     public void toggleProp(CapabilitiesEnum prop) {
         setProps(getProps() ^ prop.getCode());
         boolean whatnow = isPropEnabled(prop);
-        Core.logger.info(player.getCommandSenderName() + " toggled " + prop + " " + (whatnow ? "on." : "off."));
+        //Core.logger.info(player.getCommandSenderName() + " toggled " + prop + " " + (whatnow ? "on." : "off."));
         if (whatnow) {
             player.addChatMessage(new ChatComponentTranslation("icyadmin.turned.on", prop.toString()).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
         } else {

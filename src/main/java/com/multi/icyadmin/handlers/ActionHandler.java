@@ -3,6 +3,7 @@ package com.multi.icyadmin.handlers;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.CapabilitiesEnum;
 import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.*;
 
@@ -18,6 +19,7 @@ public class ActionHandler {
     public void serverWork(String targetName, EntityPlayer player, EntityPlayer target, NodeActionsEnum action) {
         if (!Core.proxy.canPlayerUsePanel(player)) {
             printNoPerms(player);
+            FileProcessor.appendToAdminLog(player.getCommandSenderName() + " tries to use command, but no perms.");
             return;
         }
 
@@ -40,6 +42,8 @@ public class ActionHandler {
         if (action == NodeActionsEnum.THROW_UP) {
             target.attackEntityFrom(DamageSource.cactus, 100);
         }
+
+        FileProcessor.appendToAdminLog(player.getCommandSenderName() + " switched " + action);
 
 
     }

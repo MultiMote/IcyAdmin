@@ -4,4 +4,5 @@ icyadmin.confirm=Confirm
 icyadmin.turned.on=[IcyAdmin] Prop %1$s is turned on.
 icyadmin.turned.off=[IcyAdmin] Prop %1$s is turned off.
 icyadmin.permissions=[IcyAdmin] You can't use this.
+icyadmin.receiving=Waititng for response...
 gui.iadmin.players=   Players (%1$s/%2$s):

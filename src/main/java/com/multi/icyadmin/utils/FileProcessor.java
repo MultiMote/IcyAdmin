@@ -3,6 +3,9 @@ package com.multi.icyadmin.utils;
 import com.multi.icyadmin.Core;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by MultiMote on 08.01.2015.
@@ -10,6 +13,8 @@ import java.io.*;
 public class FileProcessor {
     public static final String VARS_FILE = "config/IcyAdmin/variables.cache";
     public static final String USERS_FILE = "config/IcyAdmin/permissed.users";
+    public static final String ADMIN_LOG_FILE = "config/IcyAdmin/admins.log";
+    private static DateFormat dateFormat = new SimpleDateFormat("HH:mm-dd.MM");
 
     public static void writeVars() {
         BufferedWriter writer = null;
@@ -65,6 +70,19 @@ public class FileProcessor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void appendToAdminLog(String str) {
+        Date date = new Date();
+        String s = "[" + dateFormat.format(date) + "]: " + str;
+        Core.dynStorage.admin_logs.add(s);
+        if (Core.dynStorage.admin_logs.size() > 50) Core.dynStorage.admin_logs.remove(0);
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(ADMIN_LOG_FILE, true)));
+            out.println(s);
+            out.close();
+        } catch (IOException ignored) {
         }
     }
 

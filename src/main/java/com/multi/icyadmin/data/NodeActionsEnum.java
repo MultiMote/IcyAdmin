@@ -33,9 +33,9 @@ public enum NodeActionsEnum {
 
     public static NodeActionsEnum parseElement(String s) {
         if (s == null) return null;
-        s = s.trim();
-        for (NodeActionsEnum element : NodeActionsEnum.values()) {
-            if (element.toString().equals(s)) return element;
+        try {
+            return valueOf(s);
+        } catch (IllegalArgumentException ignored) {
         }
         return null;
     }
