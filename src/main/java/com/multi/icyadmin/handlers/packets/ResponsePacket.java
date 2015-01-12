@@ -51,20 +51,17 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
     public IMessage onMessage(ResponsePacket message, MessageContext ctx) {
         // EntityPlayer player = Core.proxy.getMessagePlayer(ctx);
         IncludesEnum req = IncludesEnum.getValueById(message.response);
-        if (req == IncludesEnum.ADMIN_LOGS) {
+
+        if (req == IncludesEnum.ADMIN_LOGS || req == IncludesEnum.DEATH_LOGS) {
             GuiScreen guiScreen = Minecraft.getMinecraft().currentScreen;
             if (guiScreen instanceof InfiPanelGui) {
-
                 if (message.phase == 1) ((InfiPanelGui) guiScreen).flushIncludes(req);
-
                 if (message.phase == 2) {
                     Core.dynStorage.menus.add(MenuElement.create("$INC_" + req, ItemListNode.title(message.value)));
                 }
-
                 if (message.phase == 3) ((InfiPanelGui) guiScreen).reloadMenu(false);
             }
         }
-
         return null;
     }
 

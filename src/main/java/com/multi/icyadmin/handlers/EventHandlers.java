@@ -3,6 +3,7 @@ package com.multi.icyadmin.handlers;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.CapabilitiesEnum;
 import com.multi.icyadmin.handlers.packets.PlayerInfoPacket;
+import com.multi.icyadmin.utils.FileProcessor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
@@ -30,6 +32,13 @@ public class EventHandlers {
             if (PlayerProps.get((EntityPlayer) event.entity).isPropEnabled(CapabilitiesEnum.INVULNERABILITY)) {
                 event.setCanceled(true);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onDeath(LivingDeathEvent event) {
+        if (event.entity instanceof EntityPlayer) {
+            FileProcessor.appendToDeathLog(((EntityPlayer) event.entity).func_110142_aN().func_151521_b().getFormattedText().replaceAll("§r", ""));
         }
     }
 

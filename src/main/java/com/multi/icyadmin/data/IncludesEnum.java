@@ -6,7 +6,7 @@ package com.multi.icyadmin.data;
 public enum IncludesEnum {
     NOTHING,
     ADMIN_LOGS,
-    SOMETHING_ELSE;
+    SOMETHING_ELSE, DEATH_LOGS;
 
     public static IncludesEnum getValueById(int n) {
         IncludesEnum[] vals = values();

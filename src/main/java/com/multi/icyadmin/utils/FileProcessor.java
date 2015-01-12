@@ -14,6 +14,7 @@ public class FileProcessor {
     public static final String VARS_FILE = "config/IcyAdmin/variables.cache";
     public static final String USERS_FILE = "config/IcyAdmin/permissed.users";
     public static final String ADMIN_LOG_FILE = "config/IcyAdmin/admins.log";
+    public static final String DEATH_LOG_FILE = "config/IcyAdmin/death.log";
     private static DateFormat dateFormat = new SimpleDateFormat("HH:mm-dd.MM");
 
     public static void writeVars() {
@@ -70,6 +71,19 @@ public class FileProcessor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void appendToDeathLog(String str) {
+        Date date = new Date();
+        String s = "[" + dateFormat.format(date) + "]: " + str;
+        Core.dynStorage.last_deads.add(s);
+        if (Core.dynStorage.last_deads.size() > 50) Core.dynStorage.last_deads.remove(0);
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(DEATH_LOG_FILE, true)));
+            out.println(s);
+            out.close();
+        } catch (IOException ignored) {
         }
     }
 

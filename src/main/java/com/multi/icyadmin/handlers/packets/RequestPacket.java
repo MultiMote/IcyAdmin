@@ -48,6 +48,14 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
                         Core.packets.sendTo(new ResponsePacket(req, s, (byte) 2), ((EntityPlayerMP) player));
                     }
                 }
+            } else if (req == IncludesEnum.DEATH_LOGS) {
+                if (Core.dynStorage.last_deads.isEmpty()) {
+                    Core.packets.sendTo(new ResponsePacket(req, "Nothing here.", (byte) 2), ((EntityPlayerMP) player));
+                } else {
+                    for (String s : Core.dynStorage.last_deads) {
+                        Core.packets.sendTo(new ResponsePacket(req, s, (byte) 2), ((EntityPlayerMP) player));
+                    }
+                }
             }
         } else Core.packets.sendTo(new ResponsePacket(req, "Fuck you.", (byte) 2), ((EntityPlayerMP) player)); //todo
         Core.packets.sendTo(new ResponsePacket(req, "", (byte) 3), ((EntityPlayerMP) player));

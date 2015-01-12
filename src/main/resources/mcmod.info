@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authors": ["MultiMote"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/icyadmin/icylogo.png",
   "screenshots": [],
   "dependencies": []
 }
