@@ -103,6 +103,6 @@ begin KITS_PAGE
 add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
 add SEPARATOR
 add "  ===[ Kits Menu ]===  " as TITLE color #1092E8
-add "    Apple" as CMD_EXEC cmd "clear %me%(>>)give %me% apple" color #1092E8
-add "    Newbie" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet(>>)give %me% leather_chestplate(>>)give %me% leather_leggings(>>)give %me% leather_boots(>>)give %me% wooden_sword" color #1092E8
+add "    Apple" as CMD_EXEC cmd "clear %me%(>>)give %me% apple 1" color #1092E8
+add "    Little Hero" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(>>)give %me% leather_chestplate 1(>>)give %me% leather_leggings 1(>>)give %me% leather_boots 1(>>)give %me% wooden_sword 1" color #1092E8
 end KITS_PAGE

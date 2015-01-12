@@ -11,6 +11,8 @@ import net.minecraft.client.resources.IResourceManagerReloadListener;
 public class ResourcesReloadListener implements IResourceManagerReloadListener {
     @Override
     public void onResourceManagerReload(IResourceManager manager) {
-        MenuParser.instance.parseMenu(I18n.format("icyadmin.menufile"));
+        if (!MenuParser.instance.checkAndParseCustom()) {
+            MenuParser.instance.parseMenu(I18n.format("icyadmin.menufile"), false);
+        }
     }
 }

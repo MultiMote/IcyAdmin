@@ -49,6 +49,7 @@ public class Core {
         actionHandler = new ActionHandler();
         FileProcessor.readVars();
         FileProcessor.readUsers();
+        FileProcessor.readLastLogLines();
         proxy.registerHandlers();
     }
 

@@ -6,10 +6,7 @@ import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
 import com.multi.icyadmin.data.NodeActionsEnum;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -22,10 +19,12 @@ public class MenuParser {
 
     public static MenuParser instance = new MenuParser();
     private final String FILE_HEADER = "menu_file_begin";
+    private final String REMOTE_LOCATION = "config/IcyAdmin";
+    private final String LOCAL_LOCATION = "assets/icyadmin/menus/";
     String CURRENT_MENU = null;
     private boolean GLOBAL_FAILURE;
 
-    public void parseMenu(String menu) {
+    public void parseMenu(String menu, boolean remote) {
         long millis = System.currentTimeMillis();
         Core.logger.info("Parsing menu " + menu + "...");
         Core.dynStorage.menus.clear();
@@ -33,7 +32,13 @@ public class MenuParser {
         InputStream is = null;
         BufferedReader reader = null;
         try {
-            is = getClass().getClassLoader().getResourceAsStream("assets/icyadmin/menus/" + menu);
+
+            if (!remote) {
+                is = getClass().getClassLoader().getResourceAsStream(LOCAL_LOCATION + menu);
+            } else {
+                is = new FileInputStream(new File(REMOTE_LOCATION, menu));
+            }
+
             if (is == null) {
                 Core.logger.error(menu + " is not exists! Kill yourself!");
                 return;
@@ -57,6 +62,17 @@ public class MenuParser {
         }
         Core.logger.info("Menu parsing finished" + (GLOBAL_FAILURE ? " with critical error" : "") + ", took " + (float) (System.currentTimeMillis() - millis) / 1000F + " s.");
     }
+
+    public boolean checkAndParseCustom() {
+        File f = new File(REMOTE_LOCATION, "custom.menu");
+        if (f.exists()) {
+            Core.logger.info("Found custom menu file, parsing it.");
+            MenuParser.instance.parseMenu("custom.menu", true);
+            return true;
+        }
+        return false;
+    }
+
 
     private void read(BufferedReader reader, String menu) {
         try {

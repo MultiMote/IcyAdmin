@@ -13,8 +13,8 @@ import java.util.Date;
 public class FileProcessor {
     public static final String VARS_FILE = "config/IcyAdmin/variables.cache";
     public static final String USERS_FILE = "config/IcyAdmin/permissed.users";
-    public static final String ADMIN_LOG_FILE = "config/IcyAdmin/admins.log";
-    public static final String DEATH_LOG_FILE = "config/IcyAdmin/death.log";
+    public static final String ADMIN_LOG_FILE = "config/IcyAdmin/logs/admins.log";
+    public static final String DEATH_LOG_FILE = "config/IcyAdmin/logs/death.log";
     private static DateFormat dateFormat = new SimpleDateFormat("HH:mm-dd.MM");
 
     public static void writeVars() {
@@ -72,6 +72,10 @@ public class FileProcessor {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void readLastLogLines() { //NIY
+
     }
 
     public static void appendToDeathLog(String str) {
