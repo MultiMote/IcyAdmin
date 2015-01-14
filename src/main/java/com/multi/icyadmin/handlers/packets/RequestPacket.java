@@ -1,7 +1,7 @@
 package com.multi.icyadmin.handlers.packets;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.IncludesEnum;
+import com.multi.icyadmin.data.RequestEnum;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -19,7 +19,7 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
     public RequestPacket() {
     }
 
-    public RequestPacket(IncludesEnum request) {
+    public RequestPacket(RequestEnum request) {
         this.request = (byte) request.ordinal();
     }
 
@@ -37,10 +37,10 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
     @Override
     public IMessage onMessage(RequestPacket message, MessageContext ctx) {
         EntityPlayer player = Core.proxy.getMessagePlayer(ctx);
-        IncludesEnum req = IncludesEnum.getValueById(message.request);
+        RequestEnum req = RequestEnum.getValueById(message.request);
         Core.packets.sendTo(new ResponsePacket(req, "", (byte) 1), ((EntityPlayerMP) player));
         if (Core.proxy.canPlayerUsePanel(player)) {
-            if (req == IncludesEnum.ADMIN_LOGS) {
+            if (req == RequestEnum.ADMIN_LOGS) {
                 if (Core.dynStorage.admin_logs.isEmpty()) {
                     Core.packets.sendTo(new ResponsePacket(req, "Nothing here.", (byte) 2), ((EntityPlayerMP) player));
                 } else {
@@ -48,7 +48,7 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
                         Core.packets.sendTo(new ResponsePacket(req, s, (byte) 2), ((EntityPlayerMP) player));
                     }
                 }
-            } else if (req == IncludesEnum.DEATH_LOGS) {
+            } else if (req == RequestEnum.DEATH_LOGS) {
                 if (Core.dynStorage.last_deads.isEmpty()) {
                     Core.packets.sendTo(new ResponsePacket(req, "Nothing here.", (byte) 2), ((EntityPlayerMP) player));
                 } else {

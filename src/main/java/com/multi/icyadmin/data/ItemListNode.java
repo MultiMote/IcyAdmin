@@ -6,7 +6,7 @@ package com.multi.icyadmin.data;
 public class ItemListNode {
     private final String name;
     private NodeActionsEnum type;
-    private IncludesEnum include;
+    private RequestEnum include;
     private String command_data;
     private int color = 0xFFFFFFFF;
     private boolean canBeSelected = true;
@@ -21,7 +21,7 @@ public class ItemListNode {
         return new ItemListNode(name == null ? "" : name);
     }
 
-    public static ItemListNode include(IncludesEnum inc) {
+    public static ItemListNode include(RequestEnum inc) {
         return new ItemListNode("").setInclude(inc);
     }
 
@@ -34,11 +34,11 @@ public class ItemListNode {
         return new ItemListNode(s).setCanBeSelected(false).setDoubleClickEventFired(false).setClickEventFired(false);
     }
 
-    public IncludesEnum getInclude() {
+    public RequestEnum getInclude() {
         return include;
     }
 
-    public ItemListNode setInclude(IncludesEnum include) {
+    public ItemListNode setInclude(RequestEnum include) {
         this.include = include;
         return this;
     }

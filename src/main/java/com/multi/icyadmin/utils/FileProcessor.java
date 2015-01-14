@@ -6,6 +6,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MultiMote on 08.01.2015.
@@ -15,7 +16,7 @@ public class FileProcessor {
     public static final String USERS_FILE = "config/IcyAdmin/permissed.users";
     public static final String ADMIN_LOG_FILE = "config/IcyAdmin/logs/admins.log";
     public static final String DEATH_LOG_FILE = "config/IcyAdmin/logs/death.log";
-    private static DateFormat dateFormat = new SimpleDateFormat("HH:mm-dd.MM");
+    private static DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM");
 
     public static void writeVars() {
         BufferedWriter writer = null;
@@ -74,8 +75,46 @@ public class FileProcessor {
         }
     }
 
-    public static void readLastLogLines() { //NIY
+    public static void readLastLogLines() {
+        Core.logger.info("Reading last log lines...");
+        readLastLinesToList(ADMIN_LOG_FILE, 30, Core.dynStorage.admin_logs);
+        readLastLinesToList(DEATH_LOG_FILE, 30, Core.dynStorage.last_deads);
+    }
 
+    public static void readLastLinesToList(String file, int lines, List<String> target) {
+        RandomAccessFile f = null;
+        long pos;
+        int linesFound = 0;
+        File remote = new File(file);
+        if (!remote.exists()) return;
+        try {
+            f = new RandomAccessFile(remote, "r");
+            pos = f.length();
+            while (pos > 0) {
+                f.seek(pos - 1);
+                if ((char) f.readByte() == '\n') {
+                    if (linesFound + 1 <= lines) {
+                        linesFound++;
+                    } else break;
+                }
+                pos--;
+            }
+            if (linesFound > 0) {
+                f.seek(pos);
+                String s;
+                while ((s = f.readLine()) != null) {
+                    target.add(s);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (f != null) try {
+                f.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void appendToDeathLog(String str) {

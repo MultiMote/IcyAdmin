@@ -1,10 +1,10 @@
 package com.multi.icyadmin.utils;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.IncludesEnum;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
 import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.data.RequestEnum;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -139,11 +139,11 @@ public class MenuParser {
 
             if (line.startsWith("include")) {
                 String include = getTagValue("include", slist);
-                IncludesEnum inc = IncludesEnum.parseElement(include);
+                RequestEnum inc = RequestEnum.parseElement(include);
                 if (!isStringValid(include)) { //unworking
                     Core.logger.error("Can't include nothing.");
                     return false;
-                } else if (inc == null) {
+                } else if (inc == null || !inc.isInclude()) {
                     Core.logger.error("Can't include " + include + ", WTF is that?");
                     return false;
                 }

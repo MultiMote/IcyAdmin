@@ -1,10 +1,10 @@
 package com.multi.icyadmin.gui;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.IncludesEnum;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
 import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.gui.elements.ItemList;
 import com.multi.icyadmin.handlers.packets.RequestPacket;
 import com.multi.icyadmin.handlers.packets.SendCommandPacket;
@@ -109,7 +109,7 @@ public class InfiPanelGui extends GuiScreen {
 
         List<ItemListNode> tmenus = new ArrayList<ItemListNode>(menus);
         for (ItemListNode listnode : tmenus) {
-            IncludesEnum inc = listnode.getInclude();
+            RequestEnum inc = listnode.getInclude();
             if (inc != null) {
                 if (request) {
                     Core.packets.sendToServer(new RequestPacket(inc));
@@ -123,7 +123,7 @@ public class InfiPanelGui extends GuiScreen {
         }
     }
 
-    public void flushIncludes(IncludesEnum inc) {
+    public void flushIncludes(RequestEnum inc) {
         ArrayList<MenuElement> mcopy = new ArrayList<MenuElement>(Core.dynStorage.menus);
         for (MenuElement node : mcopy) {
             if (node.menu.equals("$INC_" + inc)) Core.dynStorage.menus.remove(node);

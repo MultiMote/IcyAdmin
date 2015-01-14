@@ -1,9 +1,9 @@
 package com.multi.icyadmin.handlers.packets;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.IncludesEnum;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
+import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.gui.InfiPanelGui;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -26,7 +26,7 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
     public ResponsePacket() {
     }
 
-    public ResponsePacket(IncludesEnum response, String value, byte phase) {
+    public ResponsePacket(RequestEnum response, String value, byte phase) {
         this.response = (byte) response.ordinal();
         this.value = value;
         this.phase = phase;
@@ -50,9 +50,9 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
     @Override
     public IMessage onMessage(ResponsePacket message, MessageContext ctx) {
         // EntityPlayer player = Core.proxy.getMessagePlayer(ctx);
-        IncludesEnum req = IncludesEnum.getValueById(message.response);
+        RequestEnum req = RequestEnum.getValueById(message.response);
 
-        if (req == IncludesEnum.ADMIN_LOGS || req == IncludesEnum.DEATH_LOGS) {
+        if (req == RequestEnum.ADMIN_LOGS || req == RequestEnum.DEATH_LOGS) {
             GuiScreen guiScreen = Minecraft.getMinecraft().currentScreen;
             if (guiScreen instanceof InfiPanelGui) {
                 if (message.phase == 1) ((InfiPanelGui) guiScreen).flushIncludes(req);
