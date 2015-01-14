@@ -1,14 +1,20 @@
 package com.multi.icyadmin.data;
 
+import com.multi.icyadmin.handlers.PlayerProps;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+
 /**
  * Created by MultiMote on 03.01.2015.
  */
 public class ItemListNode {
     private final String name;
+    private ListensEnum listens;
     private NodeActionsEnum type;
     private RequestEnum include;
     private String command_data;
     private int color = 0xFFFFFFFF;
+    private int activeColor = 0xFFFFFFFF;
     private boolean canBeSelected = true;
     private boolean doubleClickEventFired = true;
     private boolean clickEventFired = false;
@@ -54,11 +60,40 @@ public class ItemListNode {
     }
 
     public int getColor() {
+        if (getListens() != null) {
+            EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+            if (player == null) return color;
+            PlayerProps p = PlayerProps.get(player);
+
+            if (getListens() == ListensEnum.PROP && type.getProp() != null && p != null && p.isPropEnabled(type.getProp())) {
+                return activeColor;
+            } else if (getListens() == ListensEnum.GAMEMODE_CREATIVE && player.capabilities.isCreativeMode) {
+                return activeColor;
+            } else if (getListens() == ListensEnum.GAMEMODE_ADVENTURE && !player.capabilities.isCreativeMode && !player.capabilities.allowEdit) {
+                return activeColor;
+            } else if (getListens() == ListensEnum.GAMEMODE_SURVIVAL && !player.capabilities.isCreativeMode && player.capabilities.allowEdit) {
+                return activeColor;
+            }
+        }
         return color;
     }
 
     public ItemListNode setColor(int color) {
         this.color = color;
+        return this;
+    }
+
+    public ItemListNode setActiveColor(int color) {
+        this.activeColor = color;
+        return this;
+    }
+
+    public ListensEnum getListens() {
+        return listens;
+    }
+
+    public ItemListNode setListens(ListensEnum listens) {
+        this.listens = listens;
         return this;
     }
 

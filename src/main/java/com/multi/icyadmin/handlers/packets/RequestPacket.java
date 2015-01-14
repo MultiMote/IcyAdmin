@@ -2,6 +2,8 @@ package com.multi.icyadmin.handlers.packets;
 
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.RequestEnum;
+import com.multi.icyadmin.utils.FileProcessor;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -15,23 +17,31 @@ import net.minecraft.entity.player.EntityPlayerMP;
 public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, IMessage> {
 
     byte request;
+    String customData;
 
     public RequestPacket() {
     }
 
-    public RequestPacket(RequestEnum request) {
+    public RequestPacket(RequestEnum request, String customData) {
         this.request = (byte) request.ordinal();
+        this.customData = customData;
+    }
+
+    public RequestPacket(RequestEnum request) {
+        this(request, "");
     }
 
 
     @Override
     public void toBytes(ByteBuf buffer) {
         buffer.writeByte(request);
+        ByteBufUtils.writeUTF8String(buffer, customData);
     }
 
     @Override
     public void fromBytes(ByteBuf buffer) {
         request = buffer.readByte();
+        customData = ByteBufUtils.readUTF8String(buffer);
     }
 
     @Override
@@ -56,6 +66,8 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
                         Core.packets.sendTo(new ResponsePacket(req, s, (byte) 2), ((EntityPlayerMP) player));
                     }
                 }
+            } else if (req == RequestEnum.SEND_ACTION) {
+                FileProcessor.appendToAdminLog(player.getCommandSenderName() + " " + message.customData);
             }
         } else Core.packets.sendTo(new ResponsePacket(req, "Fuck you.", (byte) 2), ((EntityPlayerMP) player)); //todo
         Core.packets.sendTo(new ResponsePacket(req, "", (byte) 3), ((EntityPlayerMP) player));

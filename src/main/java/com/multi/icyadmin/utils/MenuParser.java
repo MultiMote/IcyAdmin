@@ -1,10 +1,7 @@
 package com.multi.icyadmin.utils;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.ItemListNode;
-import com.multi.icyadmin.data.MenuElement;
-import com.multi.icyadmin.data.NodeActionsEnum;
-import com.multi.icyadmin.data.RequestEnum;
+import com.multi.icyadmin.data.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -178,6 +175,13 @@ public class MenuParser {
                     }
                     node = ItemListNode.create(name);
                     node.setColor(getTagHEXInt("color", slist));
+                    node.setActiveColor(getTagHEXInt("activeColor", slist));
+                    ListensEnum listen = ListensEnum.parseElement(getTagValue("listens", slist));
+                    if (listen != null) {
+                        if (listen == ListensEnum.PROP) {
+                            Core.logger.warn("Command can't listen prop!");
+                        } else node.setListens(listen);
+                    }
                     node.setType(NodeActionsEnum.CMD_EXEC);
                     node.setCommandData(cmd);
 
@@ -189,6 +193,13 @@ public class MenuParser {
                     }
                     node = role == NodeActionsEnum.TITLE ? ItemListNode.title(name) : ItemListNode.create(name);
                     node.setColor(getTagHEXInt("color", slist));
+                    node.setActiveColor(getTagHEXInt("activeColor", slist));
+                    ListensEnum listen = ListensEnum.parseElement(getTagValue("listens", slist));
+                    if (listen != null) {
+                        if (!role.canListen() && listen == ListensEnum.PROP) {
+                            Core.logger.warn(role + " doesn't have prop to listen!");
+                        } else node.setListens(listen);
+                    }
                     node.setType(role);
 
                 }

@@ -7,7 +7,8 @@ public enum RequestEnum {
     NOTHING(false),
     ADMIN_LOGS(true),
     SOMETHING_ELSE(true),
-    DEATH_LOGS(true);
+    DEATH_LOGS(true),
+    SEND_ACTION(false);
 
     private final boolean isInclude;
 

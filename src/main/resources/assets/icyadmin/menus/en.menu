@@ -26,17 +26,17 @@ add "    Unload player out of vehicle" as NOTHING color #38B5E1
 #add "    On-screen icons" as NOTHING color #B81A0F
 add "=============================================" as TITLE color #406BC7
 add "  ===[ Admin Tools ]===  " as TITLE color #1092E8
-add "    Godmode" as INVULNERABILITY_TOGGLE color #B81A0F
+add "    Godmode" as INVULNERABILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 #add "    Speed boost" as NOTHING color #B81A0F
 add SEPARATOR
-add "    Creative mode" as CMD_EXEC cmd "gamemode 1 %me%" color #B81A0F
-add "    Survival mode" as CMD_EXEC cmd "gamemode 0 %me%" color #B81A0F
-add "    Adventure mode" as CMD_EXEC cmd "gamemode 2 %me%" color #B81A0F
+add "    Creative mode" as CMD_EXEC cmd "gamemode 1 %me%" listens GAMEMODE_CREATIVE activeColor #2DDB2C color #B81A0F
+add "    Survival mode" as CMD_EXEC cmd "gamemode 0 %me%" listens GAMEMODE_SURVIVAL activeColor #2DDB2C color #B81A0F
+add "    Adventure mode" as CMD_EXEC cmd "gamemode 2 %me%" listens GAMEMODE_ADVENTURE activeColor #2DDB2C color #B81A0F
 add SEPARATOR
-add "    Fast shooting" as FAST_SHOOTING_TOGGLE color #B81A0F
-add "    Remove hostiles (5m) every 2 seconds" as MOB_AURA_TOGGLE color #B81A0F
-add "    Invincibility" as INVINCIBILITY_TOGGLE color #B81A0F
-add "    Hide Nameplate" as NAMEPLATE_TOGGLE color #B81A0F
+add "    Fast shooting" as FAST_SHOOTING_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Remove hostiles (5m) every 2 seconds" as MOB_AURA_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Invincibility" as INVINCIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Hide Nameplate" as NAMEPLATE_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "=============================================" as TITLE color #406BC7
 add "  ===[ Utils ]===  " as TITLE color #1092E8
 add "    Play sound to all" as CMD_EXEC cmd "playsound $Sound @a" color #38B5E1

@@ -122,11 +122,14 @@ public class FileProcessor {
         String s = "[" + dateFormat.format(date) + "]: " + str;
         Core.dynStorage.last_deads.add(s);
         if (Core.dynStorage.last_deads.size() > 50) Core.dynStorage.last_deads.remove(0);
+        File remote = new File(DEATH_LOG_FILE);
         try {
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(DEATH_LOG_FILE, true)));
+            remote.getParentFile().mkdirs();
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(remote, true)));
             out.println(s);
             out.close();
-        } catch (IOException ignored) {
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -135,11 +138,14 @@ public class FileProcessor {
         String s = "[" + dateFormat.format(date) + "]: " + str;
         Core.dynStorage.admin_logs.add(s);
         if (Core.dynStorage.admin_logs.size() > 50) Core.dynStorage.admin_logs.remove(0);
+        File remote = new File(ADMIN_LOG_FILE);
         try {
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(ADMIN_LOG_FILE, true)));
+            remote.getParentFile().mkdirs();
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(remote, true)));
             out.println(s);
             out.close();
-        } catch (IOException ignored) {
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

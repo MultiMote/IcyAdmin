@@ -5,30 +5,35 @@ package com.multi.icyadmin.data;
  */
 
 public enum NodeActionsEnum {
-    NOTHING,
-    TITLE,
-    PLAYER,
-    PAGE,
-    CMD_EXEC,
-    INVULNERABILITY_TOGGLE,
-    INVINCIBILITY_TOGGLE,
-    NAMEPLATE_TOGGLE,
-    MOB_AURA_TOGGLE,
-    FAST_SHOOTING_TOGGLE,
-    INFINITE_ARROWS_TOGGLE,
-    BAN(true),
-    BAN_RESTART(true),
-    THROW_UP(true),
-    KICK,;
+    NOTHING(false, false),
+    TITLE(false, false),
+    PLAYER(false, false),
+    PAGE(false, false),
+    CMD_EXEC(false, false),
+    INVULNERABILITY_TOGGLE(false, true, CapabilitiesEnum.INVULNERABILITY),
+    INVINCIBILITY_TOGGLE(false, true, CapabilitiesEnum.INVINCIBILITY),
+    NAMEPLATE_TOGGLE(false, true, CapabilitiesEnum.HIDE_NAME),
+    MOB_AURA_TOGGLE(false, true, CapabilitiesEnum.REMOVE_HOSTILES),
+    FAST_SHOOTING_TOGGLE(false, true, CapabilitiesEnum.FAST_SHOOTING),
+    INFINITE_ARROWS_TOGGLE(false, true),
+    BAN(true, false),
+    BAN_RESTART(true, false),
+    THROW_UP(true, false),
+    KICK(true, false);
 
     private final boolean requiresTarget;
+    private final boolean canListen;
+    private final CapabilitiesEnum prop;
 
-    private NodeActionsEnum() {
-        requiresTarget = false;
+
+    private NodeActionsEnum(boolean requiresTarget, boolean canListen) {
+        this(requiresTarget, canListen, null);
     }
 
-    private NodeActionsEnum(boolean requiresTarget) {
+    private NodeActionsEnum(boolean requiresTarget, boolean canListen, CapabilitiesEnum cap) {
         this.requiresTarget = requiresTarget;
+        this.canListen = canListen;
+        this.prop = cap;
     }
 
     public static NodeActionsEnum parseElement(String s) {
@@ -49,4 +54,11 @@ public enum NodeActionsEnum {
         return requiresTarget;
     }
 
+    public boolean canListen() {
+        return canListen;
+    }
+
+    public CapabilitiesEnum getProp() {
+        return prop;
+    }
 }

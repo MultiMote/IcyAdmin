@@ -1,7 +1,6 @@
 package com.multi.icyadmin.handlers;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.CapabilitiesEnum;
 import com.multi.icyadmin.data.NodeActionsEnum;
 import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,16 +24,8 @@ public class ActionHandler {
 
         PlayerProps props = PlayerProps.get(player);
 
-        if (action == NodeActionsEnum.INVINCIBILITY_TOGGLE) {
-            props.toggleProp(CapabilitiesEnum.INVINCIBILITY);
-        } else if (action == NodeActionsEnum.NAMEPLATE_TOGGLE) {
-            props.toggleProp(CapabilitiesEnum.HIDE_NAME);
-        } else if (action == NodeActionsEnum.MOB_AURA_TOGGLE) {
-            props.toggleProp(CapabilitiesEnum.REMOVE_HOSTILES);
-        } else if (action == NodeActionsEnum.FAST_SHOOTING_TOGGLE) {
-            props.toggleProp(CapabilitiesEnum.FAST_SHOOTING);
-        } else if (action == NodeActionsEnum.INVULNERABILITY_TOGGLE) {
-            props.toggleProp(CapabilitiesEnum.INVULNERABILITY);
+        if (action.getProp() != null) {
+            props.toggleProp(action.getProp());
         }
 
         if (action.isRequiresTarget() && checkTarget(targetName, target, player, true)) return;
@@ -43,7 +34,7 @@ public class ActionHandler {
             target.attackEntityFrom(DamageSource.cactus, 100);
         }
 
-        FileProcessor.appendToAdminLog(player.getCommandSenderName() + " switched " + action);
+        //FileProcessor.appendToAdminLog(player.getCommandSenderName() + " toggled " + action);
 
 
     }

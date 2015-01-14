@@ -200,6 +200,8 @@ public class InfiPanelGui extends GuiScreen {
             }
             if (Core.actionHandler.clientCheck(playerSelected, mc.thePlayer, null, node.getType())) {
                 Core.packets.sendToServer(new SendCommandPacket(playerSelected, node.getType()));
+                Core.packets.sendToServer(new RequestPacket(RequestEnum.SEND_ACTION, "toggled " + node.getType().toString()));
+
             }
         }
     }
@@ -222,8 +224,7 @@ public class InfiPanelGui extends GuiScreen {
     }
 
     public void execChatCmd(String cmd) {
-
-
+        Core.packets.sendToServer(new RequestPacket(RequestEnum.SEND_ACTION, "executed command (" + cmd + ")"));
         Core.logger.info("Executing " + cmd);
         this.mc.thePlayer.sendChatMessage("/" + cmd);
     }
