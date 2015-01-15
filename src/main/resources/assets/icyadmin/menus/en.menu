@@ -7,6 +7,7 @@ add "=============================================" as TITLE color #406BC7
 add "  ===[ Main Menu ]===  " as TITLE color #1092E8
 add "    | Admin Logs" as PAGE to ADMIN_LOGS_PAGE color #1092E8
 add "    | Death Logs" as PAGE to DEATH_LOGS_PAGE color #1092E8
+add "    | Player Menu" as PAGE to PLAYER_MENU_PAGE color #1092E8
 add "    | Time" as PAGE to TIME_PAGE color #1092E8
 add "    | Weather" as PAGE to WEATHER_PAGE color #1092E8
 add "    | Kits" as PAGE to KITS_PAGE color #1092E8
@@ -106,3 +107,9 @@ add "  ===[ Kits Menu ]===  " as TITLE color #1092E8
 add "    Apple" as CMD_EXEC cmd "clear %me%(>>)give %me% apple 1" color #1092E8
 add "    Little Hero" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(>>)give %me% leather_chestplate 1(>>)give %me% leather_leggings 1(>>)give %me% leather_boots 1(>>)give %me% wooden_sword 1" color #1092E8
 end KITS_PAGE
+
+begin PLAYER_MENU_PAGE
+add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Player Menu ]===  " as TITLE color #1092E8
+end PLAYER_MENU_PAGE

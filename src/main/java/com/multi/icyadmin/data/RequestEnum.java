@@ -8,7 +8,10 @@ public enum RequestEnum {
     ADMIN_LOGS(true),
     SOMETHING_ELSE(true),
     DEATH_LOGS(true),
-    SEND_ACTION(false);
+    SEND_ACTION(false),
+    SEND_MENU_HASH(false),
+    REQUEST_MENU_HASH(false),
+    SEND_MENU(false);
 
     private final boolean isInclude;
 

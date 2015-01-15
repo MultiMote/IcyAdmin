@@ -34,6 +34,7 @@ public class Core {
     public static Core instance;
 
     public static Logger logger = LogManager.getLogger(Defines.MOD_NAME);
+    public static Logger logger_parser = LogManager.getLogger(Defines.PARSER_NAME);
 
     public static DynamicStorage dynStorage;
     public static ActionHandler actionHandler;

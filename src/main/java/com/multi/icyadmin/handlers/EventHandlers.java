@@ -2,7 +2,9 @@ package com.multi.icyadmin.handlers;
 
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.CapabilitiesEnum;
+import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.handlers.packets.PlayerInfoPacket;
+import com.multi.icyadmin.handlers.packets.ResponsePacket;
 import com.multi.icyadmin.utils.FileProcessor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -45,6 +47,7 @@ public class EventHandlers {
     @SubscribeEvent
     public void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
         Core.packets.sendTo(new PlayerInfoPacket(Core.proxy.canPlayerUsePanel(event.player)), (EntityPlayerMP) event.player);
+        Core.packets.sendTo(new ResponsePacket(RequestEnum.REQUEST_MENU_HASH, "", (byte) 2), (EntityPlayerMP) event.player);
     }
 
 

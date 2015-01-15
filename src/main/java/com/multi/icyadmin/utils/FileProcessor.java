@@ -3,6 +3,9 @@ package com.multi.icyadmin.utils;
 import com.multi.icyadmin.Core;
 
 import java.io.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,10 +16,34 @@ import java.util.List;
  */
 public class FileProcessor {
     public static final String VARS_FILE = "config/IcyAdmin/variables.cache";
-    public static final String USERS_FILE = "config/IcyAdmin/permissed.users";
+    public static final String USERS_FILE = "config/IcyAdmin/permitted.users";
     public static final String ADMIN_LOG_FILE = "config/IcyAdmin/logs/admins.log";
     public static final String DEATH_LOG_FILE = "config/IcyAdmin/logs/death.log";
     private static DateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM");
+
+    public static String getHash(File file) {
+        String s = "miss";
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA1");
+            InputStream is = new FileInputStream(file);
+            byte[] buffer = new byte[8192];
+            int read;
+            while ((read = is.read(buffer)) > 0)
+                md.update(buffer, 0, read);
+            byte[] md5 = md.digest();
+            BigInteger bi = new BigInteger(1, md5);
+            s = bi.toString(16);
+            is.close();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 
     public static void writeVars() {
         BufferedWriter writer = null;

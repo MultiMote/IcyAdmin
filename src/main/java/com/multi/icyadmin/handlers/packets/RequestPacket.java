@@ -3,6 +3,7 @@ package com.multi.icyadmin.handlers.packets;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.utils.FileProcessor;
+import com.multi.icyadmin.utils.MenuParser;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -68,6 +69,18 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
                 }
             } else if (req == RequestEnum.SEND_ACTION) {
                 FileProcessor.appendToAdminLog(player.getCommandSenderName() + " " + message.customData);
+            } else if (req == RequestEnum.SEND_MENU_HASH) {
+                String clientHash = message.customData;
+                String localHash = MenuParser.instance.getMenuHash("custom.menu", true);
+                if (localHash.equals("miss") && !localHash.equals(clientHash)) {
+                    Core.packets.sendTo(new ResponsePacket(RequestEnum.REQUEST_MENU_HASH, "", (byte) 4), ((EntityPlayerMP) player));
+                } else if (!localHash.equals(clientHash)) {
+                    Core.logger.warn("Sending menu to " + player.getCommandSenderName() + "...");
+                    Core.packets.sendTo(new ResponsePacket(RequestEnum.SEND_MENU, "", (byte) 2, "custom.menu"), ((EntityPlayerMP) player));
+                } else {
+                    Core.logger.warn("Everything is OK with " + player.getCommandSenderName());
+                }
+
             }
         } else Core.packets.sendTo(new ResponsePacket(req, "Fuck you.", (byte) 2), ((EntityPlayerMP) player)); //todo
         Core.packets.sendTo(new ResponsePacket(req, "", (byte) 3), ((EntityPlayerMP) player));
