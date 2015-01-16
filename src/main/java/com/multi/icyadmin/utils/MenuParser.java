@@ -16,8 +16,8 @@ public class MenuParser {
 
     public static MenuParser instance = new MenuParser();
     private final String FILE_HEADER = "menu_file_begin";
-    private final String CLIENT_MENUS_LOCATION = "config/IcyAdmin/menus/client";
-    private final String SERVER_MENUS_LOCATION = "config/IcyAdmin/menus/server";
+    private final String CLIENT_MENUS_LOCATION = "config/IcyAdmin/menus/downloaded";
+    private final String SERVER_MENUS_LOCATION = "config/IcyAdmin/menus/defined";
     private final String LOCAL_LOCATION = "assets/icyadmin/menus/";
     String CURRENT_MENU = null;
     private boolean GLOBAL_FAILURE;
