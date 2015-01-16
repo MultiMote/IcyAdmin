@@ -23,6 +23,10 @@ public class PlayerProps implements IExtendedEntityProperties {
     private static final int PROPS_ID = 27;
     private final EntityPlayer player;
 
+    private double freeze_x;
+    private double freeze_y;
+    private double freeze_z;
+
     private int entityCleanTimer;
 
     public PlayerProps(EntityPlayer player) {
@@ -61,6 +65,18 @@ public class PlayerProps implements IExtendedEntityProperties {
 
     }
 
+    public void freeze() {
+        freeze_x = player.posX;
+        freeze_y = player.posY;
+        freeze_z = player.posZ;
+        enableProp(CapabilitiesEnum.FROZEN);
+        player.setSneaking(false);
+    }
+
+    public void unFreeze() {
+        disableProp(CapabilitiesEnum.FROZEN);
+    }
+
     public void enableProp(CapabilitiesEnum prop) {
         setProps(getProps() | prop.getCode());
     }
@@ -86,6 +102,8 @@ public class PlayerProps implements IExtendedEntityProperties {
     }
 
     public void tick() {
+        //if(player.worldObj.isRemote) return;
+
         if (entityCleanTimer > 0) entityCleanTimer--;
 
         if (isPropEnabled(CapabilitiesEnum.REMOVE_HOSTILES) && entityCleanTimer <= 0) {
@@ -96,6 +114,15 @@ public class PlayerProps implements IExtendedEntityProperties {
             }
         }
 
+        if (isPropEnabled(CapabilitiesEnum.FROZEN) && (player.posX != freeze_x || player.posY != freeze_y || player.posZ != freeze_z)) {
+            player.setVelocity(0, 0, 0);
+            if (player.worldObj.isRemote) {
+                player.setPosition(player.prevPosX, player.prevPosY, player.prevPosZ);
+            } else {
+                player.setPositionAndUpdate(freeze_x, freeze_y, freeze_z);
+                player.fallDistance = 0.0F;
+            }
+        }
 
     }
 

@@ -107,20 +107,26 @@ add "    Little Hero" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(
 end KITS_PAGE
 
 begin PLAYER_MENU_PAGE
-#todo add colors
 add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
 add SEPARATOR
 add "  ===[ Player Menu ]===  " as TITLE color #1092E8
 add "    Dismount" as DISMOUNT color #1092E8
 add SEPARATOR
-add "    Heal" as HEAL color #1092E8
-add "    Feed" as FEED color #1092E8
+add "  Good Features:" as TITLE color #1092E8
+add "    Heal" as HEAL color #F29090
+add "    Feed" as FEED color #CB7C7C
+add "    Remove Potion Effects" as UNPOTION color #95D326
+add "    * UnFreeze" as UNFREEZE color #AFEAEA
 add SEPARATOR
-add "    Starve" as STARVE color #1092E8
-add "    Poison" as POISON color #1092E8
-add "    Kill" as KILL color #1092E8
+add "  Bad Features:" as TITLE color #1092E8
+add "    Clear Inventory" as CLEAR_INVENTORY color #B81A0F
+add "    * Freeze" as FREEZE color #AFEAEA
+add "    Starve" as STARVE color #986C3E
+add "    Poison" as POISON color #83B528
+add "    Ignite" as IGNITE color #B81A0F
+add "    Kill" as KILL color #B81A0F
 add SEPARATOR
-add "    Set gamemode to survival" as CMD_EXEC cmd "gamemode 0 %player%" color #1092E8
-add "    Set gamemode to adventure" as CMD_EXEC cmd "gamemode 2 %player%" color #1092E8
-add "    Set gamemode to creative" as CMD_EXEC cmd "gamemode 1 %player%" color #1092E8
+add "    Set gamemode to survival" as CMD_EXEC cmd "gamemode 0 %player%" color #478AB0
+add "    Set gamemode to adventure" as CMD_EXEC cmd "gamemode 2 %player%" color #FA7F12
+add "    Set gamemode to creative" as CMD_EXEC cmd "gamemode 1 %player%" color #B81A0F
 end PLAYER_MENU_PAGE

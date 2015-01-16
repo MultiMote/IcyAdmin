@@ -8,7 +8,8 @@ public enum CapabilitiesEnum {
     INVULNERABILITY(0x2),
     HIDE_NAME(0x4),
     REMOVE_HOSTILES(0x8),
-    FAST_SHOOTING(0x10);
+    FAST_SHOOTING(0x10),
+    FROZEN(0x20);
 
     /*
     -0x1 (1)

@@ -52,7 +52,7 @@ public class SendCommandPacket implements IMessage, IMessageHandler<SendCommandP
         }
         ActionsEnum action = ActionsEnum.getValueById(message.action);
         Core.packets.sendTo(new PlayerInfoPacket(Core.proxy.canPlayerUsePanel(player)), (EntityPlayerMP) player);
-        Core.actionHandler.serverWork(message.target, player, target, action);
+        Core.actionHandler.serverWork(message.target, (EntityPlayerMP) player, (EntityPlayerMP) target, action);
         return null;
     }
 

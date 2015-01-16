@@ -4,6 +4,7 @@ import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
@@ -17,7 +18,7 @@ public class ActionHandler {
         return !(action.isRequiresTarget() && checkTarget(targetName, target, player, false));
     }
 
-    public void serverWork(String targetName, EntityPlayer player, EntityPlayer target, ActionsEnum action) {
+    public void serverWork(String targetName, EntityPlayerMP player, EntityPlayerMP target, ActionsEnum action) {
         if (!Core.proxy.canPlayerUsePanel(player)) {
             printNoPerms(player);
             FileProcessor.appendToAdminLog(player.getCommandSenderName() + " tries to use command, but no perms.");
@@ -45,6 +46,21 @@ public class ActionHandler {
             target.getFoodStats().setFoodSaturationLevel(0);
         } else if (action == ActionsEnum.DISMOUNT) {
             target.mountEntity(null);
+        } else if (action == ActionsEnum.IGNITE) {
+            target.setFire(8);
+        } else if (action == ActionsEnum.CLEAR_INVENTORY) {
+            target.inventory.clearInventory(null, -1);
+            target.inventoryContainer.detectAndSendChanges();
+
+            if (!target.capabilities.isCreativeMode) {
+                target.updateHeldItem();
+            }
+        } else if (action == ActionsEnum.UNPOTION) {
+            target.clearActivePotions();
+        } else if (action == ActionsEnum.FREEZE) {
+            props.freeze();
+        } else if (action == ActionsEnum.UNFREEZE) {
+            props.unFreeze();
         }
 
         //FileProcessor.appendToAdminLog(player.getCommandSenderName() + " toggled " + action);
