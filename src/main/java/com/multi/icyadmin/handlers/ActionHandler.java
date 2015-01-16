@@ -1,9 +1,11 @@
 package com.multi.icyadmin.handlers;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.*;
 
 /**
@@ -11,11 +13,11 @@ import net.minecraft.util.*;
  */
 public class ActionHandler {
 
-    public boolean clientCheck(String targetName, EntityPlayer player, EntityPlayer target, NodeActionsEnum action) {
+    public boolean clientCheck(String targetName, EntityPlayer player, EntityPlayer target, ActionsEnum action) {
         return !(action.isRequiresTarget() && checkTarget(targetName, target, player, false));
     }
 
-    public void serverWork(String targetName, EntityPlayer player, EntityPlayer target, NodeActionsEnum action) {
+    public void serverWork(String targetName, EntityPlayer player, EntityPlayer target, ActionsEnum action) {
         if (!Core.proxy.canPlayerUsePanel(player)) {
             printNoPerms(player);
             FileProcessor.appendToAdminLog(player.getCommandSenderName() + " tries to use command, but no perms.");
@@ -30,8 +32,19 @@ public class ActionHandler {
 
         if (action.isRequiresTarget() && checkTarget(targetName, target, player, true)) return;
 
-        if (action == NodeActionsEnum.THROW_UP) {
-            target.attackEntityFrom(DamageSource.cactus, 100);
+        if (action == ActionsEnum.HEAL) {
+            target.setHealth(target.getMaxHealth());
+        } else if (action == ActionsEnum.KILL) {
+            target.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
+        } else if (action == ActionsEnum.POISON) {
+            target.addPotionEffect(new PotionEffect(Potion.poison.id, 600, 1));
+        } else if (action == ActionsEnum.FEED) {
+            target.getFoodStats().addStats(20, 0.8F);
+        } else if (action == ActionsEnum.STARVE) {
+            target.getFoodStats().setFoodLevel(1);
+            target.getFoodStats().setFoodSaturationLevel(0);
+        } else if (action == ActionsEnum.DISMOUNT) {
+            target.mountEntity(null);
         }
 
         //FileProcessor.appendToAdminLog(player.getCommandSenderName() + " toggled " + action);

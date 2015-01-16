@@ -4,8 +4,14 @@ package com.multi.icyadmin.data;
  * Created by MultiMote on 03.01.2015.
  */
 
-public enum NodeActionsEnum {
+public enum ActionsEnum {
     NOTHING(false, false),
+    HEAL(true, false),
+    KILL(true, false),
+    POISON(true, false),
+    FEED(true, false),
+    STARVE(true, false),
+    DISMOUNT(true, false),
     TITLE(false, false),
     PLAYER(false, false),
     PAGE(false, false),
@@ -15,28 +21,24 @@ public enum NodeActionsEnum {
     NAMEPLATE_TOGGLE(false, true, CapabilitiesEnum.HIDE_NAME),
     MOB_AURA_TOGGLE(false, true, CapabilitiesEnum.REMOVE_HOSTILES),
     FAST_SHOOTING_TOGGLE(false, true, CapabilitiesEnum.FAST_SHOOTING),
-    INFINITE_ARROWS_TOGGLE(false, true),
-    BAN(true, false),
-    BAN_RESTART(true, false),
-    THROW_UP(true, false),
-    KICK(true, false);
+    INFINITE_ARROWS_TOGGLE(false, true);
 
     private final boolean requiresTarget;
     private final boolean canListen;
     private final CapabilitiesEnum prop;
 
 
-    private NodeActionsEnum(boolean requiresTarget, boolean canListen) {
+    private ActionsEnum(boolean requiresTarget, boolean canListen) {
         this(requiresTarget, canListen, null);
     }
 
-    private NodeActionsEnum(boolean requiresTarget, boolean canListen, CapabilitiesEnum cap) {
+    private ActionsEnum(boolean requiresTarget, boolean canListen, CapabilitiesEnum cap) {
         this.requiresTarget = requiresTarget;
         this.canListen = canListen;
         this.prop = cap;
     }
 
-    public static NodeActionsEnum parseElement(String s) {
+    public static ActionsEnum parseElement(String s) {
         if (s == null) return null;
         try {
             return valueOf(s);
@@ -45,8 +47,8 @@ public enum NodeActionsEnum {
         return null;
     }
 
-    public static NodeActionsEnum getValueById(int n) {
-        NodeActionsEnum[] vals = values();
+    public static ActionsEnum getValueById(int n) {
+        ActionsEnum[] vals = values();
         return n > vals.length - 1 ? NOTHING : vals[n];
     }
 

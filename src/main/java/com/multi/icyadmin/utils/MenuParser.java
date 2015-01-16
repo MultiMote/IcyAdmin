@@ -228,7 +228,7 @@ public class MenuParser {
 
                     node = ItemListNode.create(name);
                     node.setColor(getTagHEXInt("color", slist));
-                    node.setType(NodeActionsEnum.PAGE);
+                    node.setType(ActionsEnum.PAGE);
                     node.setCommandData(to);
 
                 } else if (as.equals("CMD_EXEC")) {
@@ -246,16 +246,16 @@ public class MenuParser {
                             Core.logger_parser.warn("Command can't listen prop!");
                         } else node.setListens(listen);
                     }
-                    node.setType(NodeActionsEnum.CMD_EXEC);
+                    node.setType(ActionsEnum.CMD_EXEC);
                     node.setCommandData(cmd);
 
                 } else {
-                    NodeActionsEnum role = NodeActionsEnum.parseElement(as);
+                    ActionsEnum role = ActionsEnum.parseElement(as);
                     if (role == null) {
                         Core.logger_parser.error(as + " is not valid action, skipping.");
                         return false;
                     }
-                    node = role == NodeActionsEnum.TITLE ? ItemListNode.title(name) : ItemListNode.create(name);
+                    node = role == ActionsEnum.TITLE ? ItemListNode.title(name) : ItemListNode.create(name);
                     node.setColor(getTagHEXInt("color", slist));
                     node.setActiveColor(getTagHEXInt("activeColor", slist));
                     ListensEnum listen = ListensEnum.parseElement(getTagValue("listens", slist));

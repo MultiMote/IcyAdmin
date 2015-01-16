@@ -3,7 +3,7 @@ package com.multi.icyadmin.gui;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
-import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.gui.elements.ItemList;
 import com.multi.icyadmin.handlers.packets.RequestPacket;
@@ -77,7 +77,7 @@ public class InfiPanelGui extends GuiScreen {
 
         for (Object obj : playerInfoList) {
             ItemListNode node = ItemListNode.create(((GuiPlayerInfo) obj).name);
-            node.setType(NodeActionsEnum.PLAYER);
+            node.setType(ActionsEnum.PLAYER);
             node.setClickEventFired(true);
             node.setColor(0x1F76D3);
             list.add(node);
@@ -149,16 +149,16 @@ public class InfiPanelGui extends GuiScreen {
     }
 
     public void elementClicked(ItemListNode node) {
-        if (node.getType() == NodeActionsEnum.PLAYER) {
+        if (node.getType() == ActionsEnum.PLAYER) {
             playerSelected = node.getName();
         }
     }
 
     public void elementDoubleClicked(ItemListNode node) {
-        if (node.getType() == NodeActionsEnum.PAGE) {
+        if (node.getType() == ActionsEnum.PAGE) {
             cur_menu = node.getCommandData();
             reloadMenu(true);
-        } else if (node.getType() == NodeActionsEnum.CMD_EXEC) {
+        } else if (node.getType() == ActionsEnum.CMD_EXEC) {
             if (!Core.proxy.canClientUsePanel()) {
                 printNoPerms();
                 return;
@@ -193,7 +193,7 @@ public class InfiPanelGui extends GuiScreen {
 
             } else Core.logger.error("Can't execute null command.");
 
-        } else if (node.getType() != NodeActionsEnum.NOTHING) {
+        } else if (node.getType() != ActionsEnum.NOTHING) {
             if (!Core.proxy.canClientUsePanel()) {
                 printNoPerms();
                 return;

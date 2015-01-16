@@ -1,7 +1,7 @@
 package com.multi.icyadmin.handlers.packets;
 
 import com.multi.icyadmin.Core;
-import com.multi.icyadmin.data.NodeActionsEnum;
+import com.multi.icyadmin.data.ActionsEnum;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -24,7 +24,7 @@ public class SendCommandPacket implements IMessage, IMessageHandler<SendCommandP
     public SendCommandPacket() {
     }
 
-    public SendCommandPacket(String target, NodeActionsEnum action) {
+    public SendCommandPacket(String target, ActionsEnum action) {
         this.target = target == null ? "" : target;
         this.action = action.ordinal();
     }
@@ -50,7 +50,7 @@ public class SendCommandPacket implements IMessage, IMessageHandler<SendCommandP
             target = CommandBase.getPlayer(player, message.target);
         } catch (PlayerNotFoundException ignored) {
         }
-        NodeActionsEnum action = NodeActionsEnum.getValueById(message.action);
+        ActionsEnum action = ActionsEnum.getValueById(message.action);
         Core.packets.sendTo(new PlayerInfoPacket(Core.proxy.canPlayerUsePanel(player)), (EntityPlayerMP) player);
         Core.actionHandler.serverWork(message.target, player, target, action);
         return null;

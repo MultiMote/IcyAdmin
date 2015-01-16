@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class ItemListNode {
     private final String name;
     private ListensEnum listens;
-    private NodeActionsEnum type;
+    private ActionsEnum type;
     private RequestEnum include;
     private String command_data;
     private int color = 0xFFFFFFFF;
@@ -49,11 +49,11 @@ public class ItemListNode {
         return this;
     }
 
-    public NodeActionsEnum getType() {
+    public ActionsEnum getType() {
         return type;
     }
 
-    public ItemListNode setType(NodeActionsEnum type) {
+    public ItemListNode setType(ActionsEnum type) {
         this.type = type;
         return this;
 

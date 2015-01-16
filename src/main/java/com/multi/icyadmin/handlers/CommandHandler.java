@@ -83,23 +83,4 @@ public class CommandHandler extends CommandBase {
         } else throw new WrongUsageException(getCommandUsage(sender));
     }
 
-
-    public List addTabCompletionOptions(ICommandSender sender, String[] args) {
-        if (args.length == 2) {
-            String s = args[1];
-            ArrayList arraylist = new ArrayList();
-            GameProfile[] agameprofile = MinecraftServer.getServer().func_152357_F();
-
-            for (GameProfile gameprofile : agameprofile) {
-                if (!MinecraftServer.getServer().getConfigurationManager().func_152596_g(gameprofile) && doesStringStartWith(s, gameprofile.getName())) {
-                    arraylist.add(gameprofile.getName());
-                }
-            }
-
-            return arraylist;
-        } else {
-            return null;
-        }
-    }
-
 }

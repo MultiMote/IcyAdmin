@@ -16,12 +16,10 @@ add "  ===[ Kicks, Bans ]===  " as TITLE color #1092E8
 add "    Kick" as CMD_EXEC cmd "kick %player% $Kick_Reason" color #FACBD1
 add "    Ban with reason" as CMD_EXEC cmd "ban %player% $Ban_Reason" color #B81A0F
 add "    Ban" as CMD_EXEC cmd "ban %player%" color #B81A0F
-add "    Throw" as THROW_UP color #B81A0F
 add "=============================================" as TITLE color #406BC7
-add "  ===[ Teleportation, Rideables ]===  " as TITLE color #1092E8
+add "  ===[ Teleportation ]===  " as TITLE color #1092E8
 add "    Teleport player to me" as CMD_EXEC cmd "tp %player% %me%" color #38B5E1
 add "    Teleport me to player" as CMD_EXEC cmd "tp %me% %player%" color #38B5E1
-add "    Unload player out of vehicle" as NOTHING color #38B5E1
 #add "=============================================" as TITLE color #406BC7
 #add "  ===[ System Icons ]===  " as TITLE color #1092E8
 #add "    On-screen icons" as NOTHING color #B81A0F
@@ -109,7 +107,20 @@ add "    Little Hero" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(
 end KITS_PAGE
 
 begin PLAYER_MENU_PAGE
+#todo add colors
 add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
 add SEPARATOR
 add "  ===[ Player Menu ]===  " as TITLE color #1092E8
+add "    Dismount" as DISMOUNT color #1092E8
+add SEPARATOR
+add "    Heal" as HEAL color #1092E8
+add "    Feed" as FEED color #1092E8
+add SEPARATOR
+add "    Starve" as STARVE color #1092E8
+add "    Poison" as POISON color #1092E8
+add "    Kill" as KILL color #1092E8
+add SEPARATOR
+add "    Set gamemode to survival" as CMD_EXEC cmd "gamemode 0 %player%" color #1092E8
+add "    Set gamemode to adventure" as CMD_EXEC cmd "gamemode 2 %player%" color #1092E8
+add "    Set gamemode to creative" as CMD_EXEC cmd "gamemode 1 %player%" color #1092E8
 end PLAYER_MENU_PAGE
