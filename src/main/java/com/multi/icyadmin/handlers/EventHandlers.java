@@ -39,8 +39,11 @@ public class EventHandlers {
 
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            FileProcessor.appendToDeathLog(((EntityPlayer) event.entity).func_110142_aN().func_151521_b().getFormattedText().replaceAll("§r", ""));
+        try {
+            if (event.entity instanceof EntityPlayer) {
+                FileProcessor.appendToDeathLog(((EntityPlayer) event.entity).func_110142_aN().func_151521_b().getFormattedText().replaceAll("§r", ""));
+            }
+        } catch (NoSuchMethodError ignored) {
         }
     }
 

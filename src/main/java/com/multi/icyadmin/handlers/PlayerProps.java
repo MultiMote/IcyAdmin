@@ -115,7 +115,9 @@ public class PlayerProps implements IExtendedEntityProperties {
         }
 
         if (isPropEnabled(CapabilitiesEnum.FROZEN) && (player.posX != freeze_x || player.posY != freeze_y || player.posZ != freeze_z)) {
-            player.setVelocity(0, 0, 0);
+            player.motionX = 0;
+            player.motionY = 0;
+            player.motionZ = 0;
             if (player.worldObj.isRemote) {
                 player.setPosition(player.prevPosX, player.prevPosY, player.prevPosZ);
             } else {

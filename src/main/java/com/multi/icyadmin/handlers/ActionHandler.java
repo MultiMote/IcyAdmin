@@ -27,20 +27,24 @@ public class ActionHandler {
 
         PlayerProps props = PlayerProps.get(player);
 
+
         if (action.getProp() != null) {
             props.toggleProp(action.getProp());
         }
 
         if (action.isRequiresTarget() && checkTarget(targetName, target, player, true)) return;
+        PlayerProps propsTarget;
+        if (target == null) return;
+        propsTarget = PlayerProps.get(target);
 
         if (action == ActionsEnum.HEAL) {
             target.setHealth(target.getMaxHealth());
         } else if (action == ActionsEnum.KILL) {
-            target.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
+            target.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE); //cauldron, unworking
         } else if (action == ActionsEnum.POISON) {
             target.addPotionEffect(new PotionEffect(Potion.poison.id, 600, 1));
         } else if (action == ActionsEnum.FEED) {
-            target.getFoodStats().addStats(20, 0.8F);
+            target.getFoodStats().addStats(20, 0.8F); //cauldron err
         } else if (action == ActionsEnum.STARVE) {
             target.getFoodStats().setFoodLevel(1);
             target.getFoodStats().setFoodSaturationLevel(0);
@@ -58,9 +62,9 @@ public class ActionHandler {
         } else if (action == ActionsEnum.UNPOTION) {
             target.clearActivePotions();
         } else if (action == ActionsEnum.FREEZE) {
-            props.freeze();
+            propsTarget.freeze();
         } else if (action == ActionsEnum.UNFREEZE) {
-            props.unFreeze();
+            propsTarget.unFreeze();
         }
 
         //FileProcessor.appendToAdminLog(player.getCommandSenderName() + " toggled " + action);
