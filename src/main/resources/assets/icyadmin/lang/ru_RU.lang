@@ -4,5 +4,6 @@ icyadmin.confirm=Подтвердить
 icyadmin.turned.on=[IcyAdmin] Параметр %1$s теперь активен.
 icyadmin.turned.off=[IcyAdmin] Параметр %1$s больше не активен.
 icyadmin.permissions=[IcyAdmin] А прав-то нет.
+icyadmin.notarget=Нужно выбрать игрока!
 icyadmin.receiving=Ожидание ответа...
 gui.iadmin.players=  Игроки (%1$s/%2$s):

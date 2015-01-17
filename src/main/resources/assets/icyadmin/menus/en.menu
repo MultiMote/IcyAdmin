@@ -48,7 +48,9 @@ add SEPARATOR
 add SEPARATOR
 #todo
 add "      IcyAdmin by MultiMote" as TITLE color #B4A217
-add "         Open forum link" as LINK to "http://google.com" color #FFE500
+#adf.ly because I didn't created a thread yet
+add "         Open forum link" as LINK to "http://adf.ly/wMWCk" color #FFE500
+add "            good luck, sugarcube" as TITLE color #B4A217
 end MAIN_PAGE
 
 
@@ -107,6 +109,7 @@ begin KITS_PAGE
 add "  <---- [ Main Menu ]" as PAGE to MAIN_PAGE color #1092E8
 add SEPARATOR
 add "  ===[ Kits Menu ]===  " as TITLE color #1092E8
+#todo MOAR kits
 add "    Apple" as CMD_EXEC cmd "clear %me%(>>)give %me% apple 1" color #1092E8
 add "    Little Hero" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(>>)give %me% leather_chestplate 1(>>)give %me% leather_leggings 1(>>)give %me% leather_boots 1(>>)give %me% wooden_sword 1" color #1092E8
 end KITS_PAGE

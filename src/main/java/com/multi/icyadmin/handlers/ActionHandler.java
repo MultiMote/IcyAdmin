@@ -71,11 +71,11 @@ public class ActionHandler {
 
     public boolean checkTarget(String name, EntityPlayer checkfor, EntityPlayer sender, boolean server) {
         if (name == null) {
-            printChatError(sender, "Select target player!", server);
+            printChatError(sender, StatCollector.translateToLocal("icyadmin.notarget"), server);
             return true;
         }
         if (name.trim().equals("")) {
-            printChatError(sender, "Select target player!", server);
+            printChatError(sender, StatCollector.translateToLocal("icyadmin.notarget"), server);
             return true;
         }
         if (checkfor == null && server) {

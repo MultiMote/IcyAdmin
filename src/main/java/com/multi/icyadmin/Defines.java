@@ -8,6 +8,6 @@ public class Defines {
     public static final String MOD_ID = "icyadmin";
     public static final String MOD_NAME = "IcyAdmin";
     public static final String PARSER_NAME = "IcyAdmin/MenuParser";
-    public static final String MOD_VERSION = "1.0.0";
+    public static final String MOD_VERSION = "1.0.1";
     public static final int DOUBLECLICK_MS = 300;
 }

@@ -28,7 +28,7 @@ public class CommonProxy {
     }
 
     public boolean canPlayerUsePanel(EntityPlayer player) {
-        return /*isPlayerOp(player) || */Core.dynStorage.permissed_users.contains(player.getUniqueID().toString());
+        return isPlayerOp(player) || Core.dynStorage.permissed_users.contains(player.getUniqueID().toString());
     }
 
     public boolean canClientUsePanel() {

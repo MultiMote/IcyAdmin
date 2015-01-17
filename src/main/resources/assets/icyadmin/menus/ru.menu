@@ -1,9 +1,136 @@
-#Это стандартныое меню для Русского языка. Команды и действия смешаны.
+#Это стандартное меню для Русского языка. Команды и действия смешаны.
 
 menu_file_begin
 
 begin MAIN_PAGE
 add "=============================================" as TITLE color #406BC7
-add "Команда со всплывающим окном" as CMD_EXEC cmd "say $Что_сказать"
+add "  ===[ Главное меню ]===  " as TITLE color #1092E8
+add "    | Логи администрации" as PAGE to ADMIN_LOGS_PAGE color #1092E8
+add "    | Логи смертей" as PAGE to DEATH_LOGS_PAGE color #1092E8
+add "    | Меню игрока" as PAGE to PLAYER_MENU_PAGE color #1092E8
+add "    | Меню времени" as PAGE to TIME_PAGE color #1092E8
+add "    | Меню погоды" as PAGE to WEATHER_PAGE color #1092E8
+add "    | Наборы предметов" as PAGE to KITS_PAGE color #1092E8
 add "=============================================" as TITLE color #406BC7
+add "  ===[ Кик, бан ]===  " as TITLE color #1092E8
+add "    Кик" as CMD_EXEC cmd "kick %player% $Причина_кика" color #FACBD1
+add "    Бан с причиной" as CMD_EXEC cmd "ban %player% $Причина_бана" color #B81A0F
+add "    Бан" as CMD_EXEC cmd "ban %player%" color #B81A0F
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Телепортация ]===  " as TITLE color #1092E8
+add "    Телепортировать игрока ко мне" as CMD_EXEC cmd "tp %player% %me%" color #38B5E1
+add "    Телепортировать меня к игроку" as CMD_EXEC cmd "tp %me% %player%" color #38B5E1
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Admin Tools ]===  " as TITLE color #1092E8
+add "    Неуязвимость" as INVULNERABILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add SEPARATOR
+add "    Творческий режим" as CMD_EXEC cmd "gamemode 1 %me%" listens GAMEMODE_CREATIVE activeColor #2DDB2C color #B81A0F
+add "    Режим выживания" as CMD_EXEC cmd "gamemode 0 %me%" listens GAMEMODE_SURVIVAL activeColor #2DDB2C color #B81A0F
+add "    Режим приключения" as CMD_EXEC cmd "gamemode 2 %me%" listens GAMEMODE_ADVENTURE activeColor #2DDB2C color #B81A0F
+add SEPARATOR
+add "    Быстрая стрельба" as FAST_SHOOTING_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Удалять вражеских мобов (5м) каждые 2 секунды" as MOB_AURA_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Невидимость" as INVINCIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Спрятать ник" as NAMEPLATE_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "=============================================" as TITLE color #406BC7
+add "  ===[ Utils ]===  " as TITLE color #1092E8
+add "    Воспроизвести звук всем" as CMD_EXEC cmd "playsound $Звук @a" color #38B5E1
+add "    Воспроизвести звук (расширенно)" as CMD_EXEC cmd "playsound $Звук $Для_кого $Координата_X $Координата_Y $Координата_Z $Громкость $Тональность" color #38B5E1
+add "    Сказать" as CMD_EXEC cmd "say $Что_сказать" color #38B5E1
+add "    Установить спавн тут" as CMD_EXEC cmd "setworldspawn" color #38B5E1
+add "=============================================" as TITLE color #406BC7
+add SEPARATOR
+add SEPARATOR
+add SEPARATOR
+#todo
+add "      IcyAdmin от MultiMote" as TITLE color #B4A217
+#adf.ly потому что там можно менять ссылку, а тему я ещё не создал
+add "     Открыть ссылку на форум" as LINK to "http://adf.ly/wMWCk" color #FFE500
+add "                  удачи, няш" as TITLE color #B4A217
+
 end MAIN_PAGE
+
+
+begin ADMIN_LOGS_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Логи администрации ]===  " as TITLE color #1092E8
+include ADMIN_LOGS
+end ADMIN_LOGS_PAGE
+
+begin DEATH_LOGS_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Логи смертей ]===  " as TITLE color #1092E8
+include DEATH_LOGS
+end DEATH_LOGS_PAGE
+
+begin TIME_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Меню времени ]===  " as TITLE color #1092E8
+add "   +1 Час" as CMD_EXEC cmd "time add 1000" color #1092E8
+add "   +3 Часа" as CMD_EXEC cmd "time add 3000" color #1092E8
+add "   +6 Часов" as CMD_EXEC cmd "time add 6000" color #1092E8
+add SEPARATOR
+add "     -> 06:00" as CMD_EXEC cmd "time set 0" color #5090A2
+add "     -> 12:00" as CMD_EXEC cmd "time set 6000" color #E5E33B
+add "     -> 18:00" as CMD_EXEC cmd "time set 12000" color #E87E1F
+add "     -> 00:00" as CMD_EXEC cmd "time set 18000" color #3E3E3E
+add SEPARATOR
+add "   Вручную" as CMD_EXEC cmd "time set $Время" color #1092E8
+end TIME_PAGE
+
+begin WEATHER_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Weather Menu ]===  " as TITLE color #1092E8
+add "     -> Ясная погода на 1 час" as CMD_EXEC cmd "weather clear 3600" color #EACE5D
+add "     -> Ясная погода на 6 часов" as CMD_EXEC cmd "weather clear 21600" color #EACE5D
+add "     -> Ясная погода на 16 часов" as CMD_EXEC cmd "weather clear 43200" color #EACE5D
+add "     ---> Установить вручную" as CMD_EXEC cmd "weather clear $Время_ясной_погоды" color #EACE5D
+add SEPARATOR
+add "     -> Дождь на 10 минут" as CMD_EXEC cmd "weather rain 600" color #63869F
+add "     -> Дождь на 30 минут" as CMD_EXEC cmd "weather rain 1800" color #63869F
+add "     -> Дождь на 1 час" as CMD_EXEC cmd "weather rain 3600" color #63869F
+add "     ---> Установить вручную" as CMD_EXEC cmd "weather rain $Время_дождя" color #63869F
+add SEPARATOR
+add "     -> Гроза на 10 минут" as CMD_EXEC cmd "weather thunder 600" color #6A74B7
+add "     -> Гроза на 30 минут" as CMD_EXEC cmd "weather thunder 1800" color #6A74B7
+add "     -> Гроза на 1 час" as CMD_EXEC cmd "weather thunder 3600" color #6A74B7
+add "     ---> Установить вручную" as CMD_EXEC cmd "weather thunder $Время_грозы" color #6A74B7
+add SEPARATOR
+end WEATHER_PAGE
+
+begin KITS_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Наборы предметов ]===  " as TITLE color #1092E8
+add "    Яблоко" as CMD_EXEC cmd "clear %me%(>>)give %me% apple 1" color #1092E8
+add "    Маленький герой" as CMD_EXEC cmd "clear %me%(>>)give %me% leather_helmet 1(>>)give %me% leather_chestplate 1(>>)give %me% leather_leggings 1(>>)give %me% leather_boots 1(>>)give %me% wooden_sword 1" color #1092E8
+end KITS_PAGE
+
+begin PLAYER_MENU_PAGE
+add "  <---- [ Главное меню ]" as PAGE to MAIN_PAGE color #1092E8
+add SEPARATOR
+add "  ===[ Меню игрока ]===  " as TITLE color #1092E8
+add "    Выкинуть из транспорта" as DISMOUNT color #1092E8
+add SEPARATOR
+add "  Добрый админ:" as TITLE color #1092E8
+add "    Вылечить" as HEAL color #F29090
+add "    Накормить" as FEED color #CB7C7C
+add "    Очистить эффекты зелий" as UNPOTION color #95D326
+add "    * Разморозить" as UNFREEZE color #AFEAEA
+add SEPARATOR
+add "  Злой админ:" as TITLE color #1092E8
+add "    Очистить инвентарь" as CLEAR_INVENTORY color #B81A0F
+add "    * Заморозить" as FREEZE color #AFEAEA
+add "    Установить сытость на минимум" as STARVE color #986C3E
+add "    Отравить" as POISON color #83B528
+add "    Поджечь" as IGNITE color #B81A0F
+add "    Убить" as KILL color #B81A0F
+add SEPARATOR
+add "    Установить режим выживания" as CMD_EXEC cmd "gamemode 0 %player%" color #478AB0
+add "    Установить режим приключения" as CMD_EXEC cmd "gamemode 2 %player%" color #FA7F12
+add "    Установить режим творчества" as CMD_EXEC cmd "gamemode 1 %player%" color #B81A0F
+end PLAYER_MENU_PAGE
