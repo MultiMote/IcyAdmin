@@ -43,7 +43,12 @@ add "    Play sound (extended)" as CMD_EXEC cmd "playsound $Sound $Play_sound_fo
 add "    Say" as CMD_EXEC cmd "say $Text_to_say" color #38B5E1
 add "    Set world spawn here" as CMD_EXEC cmd "setworldspawn" color #38B5E1
 add "=============================================" as TITLE color #406BC7
-
+add SEPARATOR
+add SEPARATOR
+add SEPARATOR
+#todo
+add "      IcyAdmin by MultiMote" as TITLE color #B4A217
+add "         Open forum link" as LINK to "http://google.com" color #FFE500
 end MAIN_PAGE
 
 

@@ -18,6 +18,7 @@ public enum ActionsEnum {
     CLEAR_INVENTORY(true, false),
     UNPOTION(true, false),
     TITLE(false, false),
+    LINK(false, false),
     PLAYER(false, false),
     PAGE(false, false),
     CMD_EXEC(false, false),

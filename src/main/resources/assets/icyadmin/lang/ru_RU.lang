@@ -1,5 +1,5 @@
 key.iadmin.open=Открыть Админ-панель
-icyadmin.menufile=en.menu
+icyadmin.menufile=ru.menu
 icyadmin.confirm=Подтвердить
 icyadmin.turned.on=[IcyAdmin] Параметр %1$s теперь активен.
 icyadmin.turned.off=[IcyAdmin] Параметр %1$s больше не активен.

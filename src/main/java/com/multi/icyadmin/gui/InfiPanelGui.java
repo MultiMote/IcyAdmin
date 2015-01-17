@@ -1,9 +1,9 @@
 package com.multi.icyadmin.gui;
 
 import com.multi.icyadmin.Core;
+import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.data.ItemListNode;
 import com.multi.icyadmin.data.MenuElement;
-import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.gui.elements.ItemList;
 import com.multi.icyadmin.handlers.packets.RequestPacket;
@@ -19,6 +19,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -158,6 +159,14 @@ public class InfiPanelGui extends GuiScreen {
         if (node.getType() == ActionsEnum.PAGE) {
             cur_menu = node.getCommandData();
             reloadMenu(true);
+        } else if (node.getType() == ActionsEnum.LINK) {
+            try {
+                Class oclass = Class.forName("java.awt.Desktop");
+                Object object = oclass.getMethod("getDesktop", new Class[0]).invoke(null);
+                oclass.getMethod("browse", new Class[]{URI.class}).invoke(object, new URI(node.getCommandData()));
+            } catch (Throwable throwable) {
+                Core.logger.error("Couldn\'t open link", throwable);
+            }
         } else if (node.getType() == ActionsEnum.CMD_EXEC) {
             if (!Core.proxy.canClientUsePanel()) {
                 printNoPerms();

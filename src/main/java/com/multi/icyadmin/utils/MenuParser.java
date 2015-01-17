@@ -67,17 +67,6 @@ public class MenuParser {
         return FileProcessor.getHash(f);
     }
 
-    public boolean removeMenu(String s) {
-        File f = new File(CLIENT_MENUS_LOCATION, s);
-        System.out.println("exists: " + f.exists());
-        System.out.println("read: " + f.canRead());
-        System.out.println("write: " + f.canWrite());
-        boolean b = f.delete();
-        System.out.println("removed: " + b);
-        //WTF
-        return b;
-    }
-
     public boolean bytesToClientMenu(byte[] bytes, String s) {
         File f = new File(CLIENT_MENUS_LOCATION, s);
         OutputStream is = null;
@@ -218,7 +207,7 @@ public class MenuParser {
                 } else if (!isStringValid(as)) {
                     Core.logger_parser.error("Line without action, this is UNACCEPTABLE!");
                     return false;
-                } else if (as.equals("PAGE")) {
+                } else if (as.equals("PAGE") || as.equals("LINK")) {
                     String to = getTagValue("to", slist);
 
                     if (!isStringValid(to)) {
@@ -228,7 +217,12 @@ public class MenuParser {
 
                     node = ItemListNode.create(name);
                     node.setColor(getTagHEXInt("color", slist));
-                    node.setType(ActionsEnum.PAGE);
+                    if (as.equals("LINK")) {
+                        node.setType(ActionsEnum.LINK);
+                    } else {
+                        node.setType(ActionsEnum.PAGE);
+                    }
+
                     node.setCommandData(to);
 
                 } else if (as.equals("CMD_EXEC")) {
