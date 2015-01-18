@@ -1,6 +1,8 @@
 package com.multi.icyadmin.proxy;
 
+import com.multi.bukkitadapter.BukkitAdapter;
 import com.multi.icyadmin.Core;
+import com.multi.icyadmin.Defines;
 import com.multi.icyadmin.handlers.EventHandlers;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -28,7 +30,7 @@ public class CommonProxy {
     }
 
     public boolean canPlayerUsePanel(EntityPlayer player) {
-        return isPlayerOp(player) || Core.dynStorage.permissed_users.contains(player.getUniqueID().toString());
+        return isPlayerOp(player) || Core.dynStorage.permissed_users.contains(player.getUniqueID().toString()) || BukkitAdapter.isUserHasParmission(player.getUniqueID(), Defines.BUKKIT_PANEL_PERMISSION);
     }
 
     public boolean canClientUsePanel() {

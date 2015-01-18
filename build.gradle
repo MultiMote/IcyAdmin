@@ -17,13 +17,17 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.1"
+version = "1.0.2"
 group = "com.multi.icyadmin" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "IcyAdmin"
 
 minecraft {
     version = "1.7.10-10.13.2.1230"
     runDir = "eclipse"
+}
+
+configurations {
+    staticLibs
 }
 
 dependencies {
@@ -39,6 +43,8 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    compile files('lib/BukkitAdapter.jar');
+    staticLibs files('lib/BukkitAdapter.jar');
 
 }
 
@@ -61,3 +67,11 @@ processResources
                 exclude 'mcmod.info'
             }
         }
+
+jar {
+    from {
+        configurations.staticLibs.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
