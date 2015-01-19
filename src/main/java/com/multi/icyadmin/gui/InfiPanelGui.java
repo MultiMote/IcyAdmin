@@ -36,11 +36,14 @@ public class InfiPanelGui extends GuiScreen {
     protected int y_pos_bottom = 0;
     protected int x_pos_separator = 0;
 
+    protected int updateTimer;
+
     private ItemList playerList;
     private ItemList itemsList;
     private String playerSelected;
 
     private List<ItemListNode> menus = new ArrayList<ItemListNode>();
+    private List<ItemListNode> playersOnline = new ArrayList<ItemListNode>();
 
     private ArgsGetGui askGui;
 
@@ -62,29 +65,7 @@ public class InfiPanelGui extends GuiScreen {
         x_pos_separator = x_pos + 100;
 
 
-        List<ItemListNode> list = new ArrayList<ItemListNode>();
-        NetHandlerPlayClient nethandlerplayclient = this.mc.thePlayer.sendQueue;
-        List playerInfoList = nethandlerplayclient.playerInfoList;
-        int maxPlayers = nethandlerplayclient.currentServerMaxPlayers;
-
-        list.add(ItemListNode.separator());
-
-        list.add(
-                ItemListNode.create(
-                        I18n.format("gui.iadmin.players",
-                                Integer.toString(playerInfoList.size()),
-                                Integer.toString(maxPlayers))
-                ).setColor(0xCED6DE).setCanBeSelected(false));
-
-        for (Object obj : playerInfoList) {
-            ItemListNode node = ItemListNode.create(((GuiPlayerInfo) obj).name);
-            node.setType(ActionsEnum.PLAYER);
-            node.setClickEventFired(true);
-            node.setColor(0x1F76D3);
-            list.add(node);
-        }
-
-        playerList = new ItemList(this, mc, x_pos + 1, y_pos, x_pos_separator - x_pos, y_pos_bottom - y_pos, list);
+        playerList = new ItemList(this, mc, x_pos + 1, y_pos, x_pos_separator - x_pos, y_pos_bottom - y_pos, playersOnline);
         itemsList = new ItemList(this, mc, x_pos_separator + 1, y_pos, x_pos_right - x_pos_separator - 1, y_pos_bottom - y_pos, menus);
 
 
@@ -99,6 +80,38 @@ public class InfiPanelGui extends GuiScreen {
     public void onGuiClosed() {
         askGui.setVisible(false);
         Keyboard.enableRepeatEvents(false);
+    }
+
+    @Override
+    public void updateScreen() {
+        if (updateTimer-- < 0) {
+            updatePlayerList();
+            updateTimer = 40;
+        }
+    }
+
+    public void updatePlayerList() {
+        playersOnline.clear();
+        NetHandlerPlayClient nethandlerplayclient = this.mc.thePlayer.sendQueue;
+        List playerInfoList = nethandlerplayclient.playerInfoList;
+        int maxPlayers = nethandlerplayclient.currentServerMaxPlayers;
+
+        playersOnline.add(ItemListNode.separator());
+
+        playersOnline.add(
+                ItemListNode.create(
+                        I18n.format("gui.iadmin.players",
+                                Integer.toString(playerInfoList.size()),
+                                Integer.toString(maxPlayers))
+                ).setColor(0xCED6DE).setCanBeSelected(false));
+
+        for (Object obj : playerInfoList) {
+            ItemListNode node = ItemListNode.create(((GuiPlayerInfo) obj).name);
+            node.setType(ActionsEnum.PLAYER);
+            node.setClickEventFired(true);
+            node.setColor(0x1F76D3);
+            playersOnline.add(node);
+        }
     }
 
     public void reloadMenu(boolean request) {
