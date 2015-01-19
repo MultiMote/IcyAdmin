@@ -202,7 +202,7 @@ public class InfiPanelGui extends GuiScreen {
 
             } else Core.logger.error("Can't execute null command.");
 
-        } else if (node.getType() != ActionsEnum.NOTHING) {
+        } else if (node.getType() != ActionsEnum.NOTHING && node.getType() != ActionsEnum.PLAYER) {
             if (!Core.proxy.canClientUsePanel()) {
                 printNoPerms();
                 return;
