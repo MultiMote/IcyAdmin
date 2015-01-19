@@ -27,6 +27,7 @@ public enum ActionsEnum {
     NAMEPLATE_TOGGLE(false, true, CapabilitiesEnum.HIDE_NAME),
     MOB_AURA_TOGGLE(false, true, CapabilitiesEnum.REMOVE_HOSTILES),
     FAST_SHOOTING_TOGGLE(false, true, CapabilitiesEnum.FAST_SHOOTING),
+    FLY_TOGGLE(false, true),
     INFINITE_ARROWS_TOGGLE(false, true);
 
     private final boolean requiresTarget;

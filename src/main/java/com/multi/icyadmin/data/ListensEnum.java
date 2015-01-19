@@ -5,6 +5,7 @@ package com.multi.icyadmin.data;
  */
 public enum ListensEnum {
     PROP,
+    FLY,
     GAMEMODE_CREATIVE,
     GAMEMODE_SURVIVAL,
     GAMEMODE_ADVENTURE;

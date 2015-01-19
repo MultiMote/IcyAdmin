@@ -14,6 +14,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Created by MultiMote on 02.01.2015.
@@ -69,7 +70,7 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
 
     @Override
     public IMessage onMessage(ResponsePacket message, MessageContext ctx) {
-        // EntityPlayer player = Core.proxy.getMessagePlayer(ctx);
+        EntityPlayer player = Core.proxy.getMessagePlayer(ctx);
         RequestEnum req = RequestEnum.getValueById(message.response);
         //System.out.println(req + " " + message.phase);
         if (req == RequestEnum.ADMIN_LOGS || req == RequestEnum.DEATH_LOGS) {
@@ -79,7 +80,7 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
                 if (message.phase == 2) {
                     Core.dynStorage.menus.add(MenuElement.create("$INC_" + req, ItemListNode.title(message.value)));
                 }
-                if (message.phase == 3) ((InfiPanelGui) guiScreen).reloadMenu(false);
+                if (message.phase == 10) ((InfiPanelGui) guiScreen).reloadMenu(false);
             }
         }
         if (req == RequestEnum.REQUEST_MENU_HASH) {
@@ -111,6 +112,16 @@ public class ResponsePacket implements IMessage, IMessageHandler<ResponsePacket,
                 }
             }
         }
+
+        if (req == RequestEnum.FLY) {
+            if (message.phase == 2) {
+                player.capabilities.allowFlying = false;
+            }else if (message.phase == 3) {
+                player.capabilities.allowFlying = true;
+
+            }
+        }
+
         return null;
     }
 

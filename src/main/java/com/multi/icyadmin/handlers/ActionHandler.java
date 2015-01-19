@@ -2,6 +2,8 @@ package com.multi.icyadmin.handlers;
 
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.ActionsEnum;
+import com.multi.icyadmin.data.RequestEnum;
+import com.multi.icyadmin.handlers.packets.ResponsePacket;
 import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -30,6 +32,9 @@ public class ActionHandler {
 
         if (action.getProp() != null) {
             props.toggleProp(action.getProp());
+        }else if (action == ActionsEnum.FLY_TOGGLE) {
+            player.capabilities.allowFlying = !player.capabilities.allowFlying;
+            Core.packets.sendTo(new ResponsePacket(RequestEnum.FLY, "", player.capabilities.allowFlying ? (byte)3 : (byte)2), player);
         }
 
         if (action.isRequiresTarget() && checkTarget(targetName, target, player, true)) return;

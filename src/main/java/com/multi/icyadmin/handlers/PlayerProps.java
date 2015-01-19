@@ -65,6 +65,10 @@ public class PlayerProps implements IExtendedEntityProperties {
 
     }
 
+    public void flush() {
+        setProps(0);
+    }
+
     public void freeze() {
         freeze_x = player.posX;
         freeze_y = player.posY;

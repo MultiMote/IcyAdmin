@@ -2,7 +2,9 @@ package com.multi.icyadmin.handlers;
 
 import com.mojang.authlib.GameProfile;
 import com.multi.icyadmin.Core;
+import com.multi.icyadmin.data.RequestEnum;
 import com.multi.icyadmin.handlers.packets.PlayerInfoPacket;
+import com.multi.icyadmin.handlers.packets.ResponsePacket;
 import com.multi.icyadmin.utils.FileProcessor;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,6 +74,8 @@ public class CommandHandler extends CommandBase {
 
                     try {
                         EntityPlayer target = CommandBase.getPlayer(sender, args[1]);
+                        PlayerProps.get(target).flush();
+                        Core.packets.sendTo(new ResponsePacket(RequestEnum.FLY, "", (byte)2), (EntityPlayerMP) target);
                         Core.packets.sendTo(new PlayerInfoPacket(Core.proxy.canPlayerUsePanel(target)), (EntityPlayerMP) target);
                     } catch (PlayerNotFoundException ignored) {
                     }

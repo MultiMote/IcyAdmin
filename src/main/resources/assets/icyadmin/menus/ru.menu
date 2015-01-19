@@ -23,6 +23,7 @@ add "    Телепортировать меня к игроку" as CMD_EXEC cm
 add "=============================================" as TITLE color #406BC7
 add "  ===[ Admin Tools ]===  " as TITLE color #1092E8
 add "    Неуязвимость" as INVULNERABILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Полёт" as FLY_TOGGLE listens FLY activeColor #2DDB2C color #B81A0F
 add SEPARATOR
 add "    Творческий режим" as CMD_EXEC cmd "gamemode 1 %me%" listens GAMEMODE_CREATIVE activeColor #2DDB2C color #B81A0F
 add "    Режим выживания" as CMD_EXEC cmd "gamemode 0 %me%" listens GAMEMODE_SURVIVAL activeColor #2DDB2C color #B81A0F

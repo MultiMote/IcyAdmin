@@ -30,7 +30,7 @@ public class CommonProxy {
     }
 
     public boolean canPlayerUsePanel(EntityPlayer player) {
-        return isPlayerOp(player) || Core.dynStorage.permissed_users.contains(player.getUniqueID().toString()) || BukkitAdapter.isUserHasParmission(player.getUniqueID(), Defines.BUKKIT_PANEL_PERMISSION);
+        return isPlayerOp(player) || Core.dynStorage.permissed_users.contains(player.getUniqueID().toString()) || BukkitAdapter.isUserHasPermission(player.getUniqueID(), Defines.BUKKIT_PANEL_PERMISSION);
     }
 
     public boolean canClientUsePanel() {

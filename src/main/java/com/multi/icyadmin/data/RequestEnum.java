@@ -6,7 +6,7 @@ package com.multi.icyadmin.data;
 public enum RequestEnum {
     NOTHING(false),
     ADMIN_LOGS(true),
-    SOMETHING_ELSE(true),
+    FLY(false),
     DEATH_LOGS(true),
     SEND_ACTION(false),
     SEND_MENU_HASH(false),

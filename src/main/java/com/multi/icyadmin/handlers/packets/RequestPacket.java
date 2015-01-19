@@ -83,7 +83,7 @@ public class RequestPacket implements IMessage, IMessageHandler<RequestPacket, I
 
             }
         } else Core.packets.sendTo(new ResponsePacket(req, "Fuck you.", (byte) 2), ((EntityPlayerMP) player)); //todo
-        Core.packets.sendTo(new ResponsePacket(req, "", (byte) 3), ((EntityPlayerMP) player));
+        Core.packets.sendTo(new ResponsePacket(req, "", (byte) 10), ((EntityPlayerMP) player));
         return null;
     }
 

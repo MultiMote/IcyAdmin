@@ -73,6 +73,8 @@ public class ItemListNode {
                 return activeColor;
             } else if (getListens() == ListensEnum.GAMEMODE_SURVIVAL && !player.capabilities.isCreativeMode && player.capabilities.allowEdit) {
                 return activeColor;
+            } else if (getListens() == ListensEnum.FLY && player.capabilities.allowFlying) {
+                return activeColor;
             }
         }
         return color;
