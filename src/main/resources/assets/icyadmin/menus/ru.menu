@@ -21,7 +21,7 @@ add "  ===[ Телепортация ]===  " as TITLE color #1092E8
 add "    Телепортировать игрока ко мне" as CMD_EXEC cmd "tp %player% %me%" color #38B5E1
 add "    Телепортировать меня к игроку" as CMD_EXEC cmd "tp %me% %player%" color #38B5E1
 add "=============================================" as TITLE color #406BC7
-add "  ===[ Admin Tools ]===  " as TITLE color #1092E8
+add "  ===[ Инструменты админа ]===  " as TITLE color #1092E8
 add "    Неуязвимость" as INVULNERABILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Полёт" as FLY_TOGGLE listens FLY activeColor #2DDB2C color #B81A0F
 add SEPARATOR
@@ -34,7 +34,7 @@ add "    Удалять вражеских мобов (5м) каждые 2 се�
 add "    Невидимость" as INVINCIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Спрятать ник" as NAMEPLATE_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "=============================================" as TITLE color #406BC7
-add "  ===[ Utils ]===  " as TITLE color #1092E8
+add "  ===[ Прочее ]===  " as TITLE color #1092E8
 add "    Воспроизвести звук всем" as CMD_EXEC cmd "playsound $Звук @a" color #38B5E1
 add "    Воспроизвести звук (расширенно)" as CMD_EXEC cmd "playsound $Звук $Для_кого $Координата_X $Координата_Y $Координата_Z $Громкость $Тональность" color #38B5E1
 add "    Сказать" as CMD_EXEC cmd "say $Что_сказать" color #38B5E1

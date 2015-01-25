@@ -24,6 +24,8 @@ archivesBaseName = "IcyAdmin"
 minecraft {
     version = "1.7.10-10.13.2.1230"
     runDir = "eclipse"
+    replace "%MOD_VERSION%", project.version
+    replaceIn "Defines.java"
 }
 
 configurations {
@@ -75,3 +77,10 @@ jar {
         }
     }
 }
+
+task genDeobf(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+build.dependsOn genDeobf
