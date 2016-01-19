@@ -1,5 +1,6 @@
 package com.multi.icyadmin.handlers;
 
+import com.multi.adapter.BukkitP;
 import com.multi.icyadmin.Core;
 import com.multi.icyadmin.data.ActionsEnum;
 import com.multi.icyadmin.data.RequestEnum;
@@ -45,14 +46,24 @@ public class ActionHandler {
         if (action == ActionsEnum.HEAL) {
             target.setHealth(target.getMaxHealth());
         } else if (action == ActionsEnum.KILL) {
-            target.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE); //cauldron, unworking
+            if(BukkitP.isBukkit())
+                BukkitP.killPlayer(target.getUniqueID());
+            else
+                target.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
         } else if (action == ActionsEnum.POISON) {
             target.addPotionEffect(new PotionEffect(Potion.poison.id, 600, 1));
         } else if (action == ActionsEnum.FEED) {
-            target.getFoodStats().addStats(20, 0.8F); //cauldron err
+            if(BukkitP.isBukkit())
+                BukkitP.feedPlayer(player.getUniqueID(), false);
+            else
+                target.getFoodStats().addStats(20, 0.8F);
         } else if (action == ActionsEnum.STARVE) {
-            target.getFoodStats().setFoodLevel(1);
-            target.getFoodStats().setFoodSaturationLevel(0);
+            if(BukkitP.isBukkit())
+                BukkitP.feedPlayer(player.getUniqueID(), true);
+            else {
+                target.getFoodStats().setFoodLevel(1);
+                target.getFoodStats().setFoodSaturationLevel(0);
+            }
         } else if (action == ActionsEnum.DISMOUNT) {
             target.mountEntity(null);
         } else if (action == ActionsEnum.IGNITE) {
@@ -88,7 +99,7 @@ public class ActionHandler {
             return true;
         }
         if (checkfor == null && server) {
-            printChatError(sender, "Player must be online!", server);
+            printChatError(sender, "Player must be online!", true);
             return true;
         }
         return false;

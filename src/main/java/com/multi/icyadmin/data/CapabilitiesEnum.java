@@ -4,7 +4,7 @@ package com.multi.icyadmin.data;
  * Created by MultiMote on 08.01.2015.
  */
 public enum CapabilitiesEnum {
-    INVINCIBILITY(0x1),
+    INVISIBILITY(0x1),
     INVULNERABILITY(0x2),
     HIDE_NAME(0x4),
     REMOVE_HOSTILES(0x8),

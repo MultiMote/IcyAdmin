@@ -35,7 +35,7 @@ add "    Adventure mode" as CMD_EXEC cmd "gamemode 2 %me%" listens GAMEMODE_ADVE
 add SEPARATOR
 add "    Fast shooting" as FAST_SHOOTING_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Remove hostiles (5m) every 2 seconds" as MOB_AURA_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
-add "    Invincibility" as INVINCIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Invisibility" as INVISIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Hide Nameplate" as NAMEPLATE_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "=============================================" as TITLE color #406BC7
 add "  ===[ Utils ]===  " as TITLE color #1092E8
@@ -47,9 +47,7 @@ add "=============================================" as TITLE color #406BC7
 add SEPARATOR
 add SEPARATOR
 add SEPARATOR
-#todo
 add "      IcyAdmin by MultiMote" as TITLE color #B4A217
-#adf.ly because I didn't created a thread yet
 add "         Open forum link" as LINK to "http://adf.ly/wMWCk" color #FFE500
 add "            good luck, sugarcube" as TITLE color #B4A217
 end MAIN_PAGE

@@ -23,7 +23,7 @@ public class ClientHandler {
 
     @SubscribeEvent
     public void renderPlayer(RenderPlayerEvent.Pre e) {
-        boolean inv = PlayerProps.get(e.entityPlayer).isPropEnabled(CapabilitiesEnum.INVINCIBILITY);
+        boolean inv = PlayerProps.get(e.entityPlayer).isPropEnabled(CapabilitiesEnum.INVISIBILITY);
 
         if (invPrev != inv) {
             try {

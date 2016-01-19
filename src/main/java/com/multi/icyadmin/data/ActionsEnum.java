@@ -23,7 +23,7 @@ public enum ActionsEnum {
     PAGE(false, false),
     CMD_EXEC(false, false),
     INVULNERABILITY_TOGGLE(false, true, CapabilitiesEnum.INVULNERABILITY),
-    INVINCIBILITY_TOGGLE(false, true, CapabilitiesEnum.INVINCIBILITY),
+    INVISIBILITY_TOGGLE(false, true, CapabilitiesEnum.INVISIBILITY),
     NAMEPLATE_TOGGLE(false, true, CapabilitiesEnum.HIDE_NAME),
     MOB_AURA_TOGGLE(false, true, CapabilitiesEnum.REMOVE_HOSTILES),
     FAST_SHOOTING_TOGGLE(false, true, CapabilitiesEnum.FAST_SHOOTING),

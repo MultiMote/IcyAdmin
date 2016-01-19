@@ -31,7 +31,7 @@ add "    Режим приключения" as CMD_EXEC cmd "gamemode 2 %me%" li
 add SEPARATOR
 add "    Быстрая стрельба" as FAST_SHOOTING_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Удалять вражеских мобов (5м) каждые 2 секунды" as MOB_AURA_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
-add "    Невидимость" as INVINCIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
+add "    Невидимость" as INVISIBILITY_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "    Спрятать ник" as NAMEPLATE_TOGGLE listens PROP activeColor #2DDB2C color #B81A0F
 add "=============================================" as TITLE color #406BC7
 add "  ===[ Прочее ]===  " as TITLE color #1092E8
@@ -43,9 +43,7 @@ add "=============================================" as TITLE color #406BC7
 add SEPARATOR
 add SEPARATOR
 add SEPARATOR
-#todo
 add "      IcyAdmin от MultiMote" as TITLE color #B4A217
-#adf.ly потому что там можно менять ссылку, а тему я ещё не создал
 add "     Открыть ссылку на форум" as LINK to "http://adf.ly/wMWCk" color #FFE500
 add "                  удачи, няш" as TITLE color #B4A217
 
